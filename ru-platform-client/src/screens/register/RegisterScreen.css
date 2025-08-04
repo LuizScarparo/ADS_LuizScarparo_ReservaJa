@@ -1,0 +1,26 @@
+.welcome-register {
+    display: flex;
+    margin-top: 3rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-register-span {
+    font-family: var(--font-bolota);
+    font-weight: 700;
+    line-height: 32px;
+    font-size: 2rem;
+    color: var(--main-orange);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}

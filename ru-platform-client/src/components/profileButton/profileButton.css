@@ -1,0 +1,53 @@
+/* -------- Base: Mobile-first -------- */
+.upf-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem; /* distância igual entre os elementos */
+  padding: 0.5rem 0;
+}
+
+.upf-btn {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--light-gray);
+  font-weight: 500;
+  font-size: 1.1rem;
+  min-width: 6rem;
+  text-wrap: nowrap;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-radius 0.3s ease;
+}
+
+.upf-btn.active {
+  background-color: var(--light-orange);
+  color: var(--main-orange);
+  font-weight: 700;
+}
+
+.upf-separator{
+  height: 3rem;
+}
+/* -------- Telas maiores -------- */
+@media (min-width: 768px) {
+  .upf-profile {
+    padding: 1.5rem;
+    max-width: 400px;
+    gap: 1rem;
+  }
+
+  .upf-btn {
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .upf-separator {
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,88 @@
+/* FOOTER BASE */
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background-color: var(--main-green);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Centraliza e organiza o conteúdo */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+/* LOGOS agrupadas com margem esquerda */
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 4rem; /* ~80px */
+}
+
+/* ALTURA DAS LOGOS EM REM */
+.footer-logo-image,
+.footer-upf-image {
+  height: 4rem; /* Aproximadamente 80px */
+}
+
+/* NAVIGATION agrupada com margem direita */
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 5rem; /* ~80px */
+}
+
+.footer-link {
+  font-family: var(--font-century);
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer-link:hover,
+.footer-link.active {
+  opacity: 0.75;
+}
+
+/* TELAS MENORES QUE 900px */
+@media (max-width: 900px) {
+  .footer-content {
+    justify-content: center;         /* Centraliza tudo */
+  }
+
+  .footer-logos {
+    padding-left: 0;                 /* Remove margem lateral */
+    justify-content: center;
+  }
+
+  .footer-logo-image,
+  .footer-upf-image {
+    height: 2.8125rem; /* 45px */
+  }
+
+  .footer-nav {
+    display: none;
+  }
+}
+
+/* TELAS MENORES QUE 768px */
+@media (max-width: 768px) {
+  .footer-logo-image,
+  .footer-upf-image {
+    height: 2.8125rem; /* 45px */
+  }
+
+  .footer-nav {
+    display: none;
+  }
+}

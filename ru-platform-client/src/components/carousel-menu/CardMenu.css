@@ -1,0 +1,25 @@
+.card-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card-image {
+  margin-top: 50px;  
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+  max-width: 100%;
+  width: 390px;
+  max-height: 240px;
+  object-fit: contain;   
+}
+
+/* Card central destacado (via .slick-center) */
+.slick-center .card-menu .card-image {
+  transform: translateY(-10px);
+  opacity: 1;
+  z-index: 2;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+}

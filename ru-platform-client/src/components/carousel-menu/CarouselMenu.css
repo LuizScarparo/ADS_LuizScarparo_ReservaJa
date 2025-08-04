@@ -1,0 +1,64 @@
+.custom-arrow {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--main-green);
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.custom-arrow.left {
+  left: calc(50% - clamp(150px, 17vw, 320px)); /* adapta à tela */
+}
+
+.custom-arrow.right {
+  right: calc(50% - clamp(150px, 17vw, 320px));
+}
+
+
+/* === SLIDE EM DESTAQUE === */
+.slick-center .slider-image {
+  transform: scale(1.05);
+  opacity: 1;
+  z-index: 2;
+}
+
+/* === DOTS CUSTOMIZADOS === */
+.slick-dots {
+  position: absolute;
+  bottom: -1.5rem;
+  width: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 5;
+}
+
+.slick-dots li {
+  margin: 0 6px;
+}
+
+.slick-dots button {
+  width: 14px;
+  height: 14px;
+}
+
+.slick-dots li button:before {
+  font-size: 15px;
+  color: #CCCCCC;
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: var(--main-green);
+}

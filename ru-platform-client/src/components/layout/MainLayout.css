@@ -1,0 +1,7 @@
+.main-content {
+    box-sizing: border-box;
+    min-height: calc(100vh - 10vh - 10vh);
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    overflow: hidden;
+}
