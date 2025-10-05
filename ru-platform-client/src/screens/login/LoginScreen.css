@@ -10,16 +10,6 @@
     gap: 0;
 }
 
-.welcome-span {
-    font-family: var(--font-bolota);
-    font-weight: 700;
-    font-size: 1.3rem;
-    line-height: 1;
-    color: var(--main-orange);
-    text-align: center;
-    margin: 0;
-}
-
 .make-your-login-span {
     font-family: var(--font-century);
     font-weight: 400;
@@ -36,6 +26,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.welcome-span {
+    font-family: var(--font-bolota);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--main-orange);
+    text-align: center;
+    margin: 0;
 }
 
 .login-form {
@@ -88,7 +88,6 @@
 
 .register-question-span {
     color: #6B6B6B;
-
 }
 
 .register-span {
