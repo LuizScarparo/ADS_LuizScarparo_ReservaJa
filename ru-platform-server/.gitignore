@@ -7,13 +7,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-.env
 node_modules
-dist
-dist-ssr
-c.local
+.env
+.env.*
+serviceAccountKey.json
+**/serviceAccountKey.json
 *.adminKeysGenerator.txt
-*.serviceAccountKey.json
 
 # Editor directories and files
 .vscode/*
