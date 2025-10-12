@@ -41,8 +41,8 @@ function AppRoutes() {
                 <Route element={
                     <ProtectedRoute isAllowed={["admin", "student", "teacher", "employee", "visitor"]} />
                 }>
-                    <Route path="/home" element={<MainLayout><HomeScreen/></MainLayout>} />
                     <Route path="/about" element={<MainLayout><AboutScreen/></MainLayout>} />
+                    <Route path="/home" element={<MainLayout><HomeScreen/></MainLayout>} />
                     <Route path="/my-reservations" element={<MainLayout><MyReservationsScreen/></MainLayout>} />
                 </Route>
 
@@ -52,7 +52,6 @@ function AppRoutes() {
                 }>
                     <Route path="/manage-reservations" element={<MainLayout><ManageReservationsScreen/></MainLayout>} />
                 </Route>
-
             </Routes>
         </Router>
     )
