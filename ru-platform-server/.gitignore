@@ -11,9 +11,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
-adminKeysGenerator.txt
-serviceAccountKey.json
+c.local
+*.adminKeysGenerator.txt
+*.serviceAccountKey.json
 
 # Editor directories and files
 .vscode/*
