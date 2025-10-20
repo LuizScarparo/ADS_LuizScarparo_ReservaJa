@@ -10,15 +10,6 @@
     gap: 0;
 }
 
-.make-your-login-span {
-    font-family: var(--font-century);
-    font-weight: 400;
-    font-size: 1.2rem;
-    color: var(--main-orange);
-    text-align: center;
-    margin-top: -0.3rem;
-}
-
 .login-section {
     width: 100%;
     max-width: 300px;
@@ -26,6 +17,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.make-your-login-span {
+    font-family: var(--font-century);
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--main-orange);
+    text-align: center;
+    margin-top: -0.3rem;
 }
 
 .welcome-span {
@@ -129,7 +129,7 @@
     }
 }
 
-/* ---------- Tablet & Desktop Expansion ---------- */
+/* ---------- Desktop % Tablet Expansion ---------- */
 @media (min-width: 768px) {
     .welcome-login {
         max-width: 400px;
