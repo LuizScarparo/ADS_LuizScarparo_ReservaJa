@@ -18,14 +18,10 @@ export default function AboutScreen() {
             <div className="about-section__text">
               <h2 className="about-title">O QUE É O RU?</h2>
               <p className="about-paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus
-                dolor dui, non Lorem ut lacus, ex tincidunt orci gravida. Praesent
-                non in diam amet, ex quis tincidunt non, dui, quam orci. Nullam odio
-                placerat. Ut placerat lorem dignissim, ipsum laoreet non, ac
-                tincidunt elit est. Lobortis eget amet, ultrices tincidunt
-                dignissim, ipsum ac placerat. Lacus, vel felis, sed ultrices quam id.
-                Nam ipsum tortor, tortor. Vestibulum varius nulla, commodo odio leo,
-                convallis vitae lorem. Nunc ac tincidunt amet, ac elit volutpat luctus.
+                O Restaurante Universitário (RU) da Universidade de Passo Fundo é um espaço voltado à alimentação saudável, acessível e de qualidade para toda a comunidade.
+                Nosso objetivo é oferecer refeições equilibradas e nutricionalmente adequadas a estudantes, professores, técnicos administrativos e visitantes,
+                promovendo o bem-estar e contribuindo para o desempenho nas atividades de ensino, pesquisa e extensão.
+                Agora, com o novo aplicativo de agendamento, é possível planejar suas refeições com mais praticidade, escolhendo o horário e garantindo seu acesso ao restaurante de forma rápida e prática.
               </p>
             </div>
 
@@ -44,15 +40,9 @@ export default function AboutScreen() {
           <section className="about-section about-section--single">
             <h2 className="about-title">QUAL NOSSO OBJETIVO?</h2>
             <p className="about-paragraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus
-              dolor dui, non Lorem ut lacus, ex tincidunt orci gravida. Praesent non
-              in diam amet, ex quis tincidunt non, dui, quam orci. Nullam odio
-              placerat. Ut placerat lorem dignissim, ipsum laoreet non, ac tincidunt
-              elit est. Lobortis eget amet, ultrices tincidunt dignissim, ipsum ac
-              placerat. Lacus, vel felis, sed ultrices quam id. Nam ipsum tortor,
-              tortor amet. Vestibulum varius nulla, commodo odio leo, convallis vitae
-              lorem. Nunc ac tincidunt amet, ac elit volutpat luctus. Sed consectetur
-              est, nec faucibus faucibus tortor.
+              Nosso principal objetivo é facilitar o acesso ao Restaurante Universitário e otimizar a gestão das refeições por meio da tecnologia.
+              O aplicativo foi desenvolvido para tornar o processo de agendamento mais simples, evitar filas e desperdícios de alimentos, além de melhorar a experiência de todos os usuários.
+              Com isso, buscamos integrar inovação e sustentabilidade, reforçando o compromisso da UPF em oferecer soluções que beneficiem a comunidade universitária e promovam uma alimentação consciente.
             </p>
           </section>
 
