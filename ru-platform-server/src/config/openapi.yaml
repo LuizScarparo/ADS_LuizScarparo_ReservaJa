@@ -20,45 +20,187 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    UserRegisterBase:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "John Doe"
+        mail:
+          type: string
+          format: email
+          example: "user@example.com"
+        password:
+          type: string
+          example: "yourPassword123"
+        role:
+          type: string
+          enum: [visitor, student, teacher, employee, admin]
+          example: "student"
+        phone:
+          type: string
+          example: "54 99999-9999"
+      required:
+        - name
+        - mail
+        - password
+        - role
+        - phone
+
+    StudentRegister:
+      allOf:
+        - $ref: '#/components/schemas/UserRegisterBase'
+        - type: object
+          properties:
+            student:
+              type: object
+              properties:
+                enrollmentNumber:
+                  type: string
+                  example: "123456"
+              required:
+                - enrollmentNumber
+          required:
+            - student
+
+    AdminRegister:
+      allOf:
+        - $ref: '#/components/schemas/UserRegisterBase'
+        - type: object
+          properties:
+            role:
+              type: string
+              enum: [admin]
+              example: "admin"
+            adminKey:
+              type: string
+              description: Chave de administrador válida para criação de contas admin
+              example: "4c75644e-7694-464f-8232-2ca3aa9bc38e"
+            admin:
+              type: object
+              properties:
+                enrollmentNumber:
+                  type: string
+                  example: "123456"
+              required:
+                - enrollmentNumber
+          required:
+            - role
+            - adminKey
+            - admin
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "usr_01HZYKABCD123"
+        name:
+          type: string
+          example: "John Doe"
+        mail:
+          type: string
+          format: email
+          example: "user@example.com"
+        role:
+          type: string
+          enum: [visitor, student, teacher, employee, admin]
+          example: "student"
+        phone:
+          type: string
+          example: "54 99999-9999"
+        student:
+          type: object
+          nullable: true
+          properties:
+            enrollmentNumber:
+              type: string
+              example: "123456"
+        admin:
+          type: object
+          nullable: true
+          properties:
+            enrollmentNumber:
+              type: string
+              example: "123456"
 security:
   - bearerAuth: []
+
 paths:
   /auth/register:
     post:
       tags:
         - Auth
-      summary: Registra um novo usuário
+      summary: Registra um novo usuário (estudante, visitante, etc.)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: "John Doe"
-                mail:
-                  type: string
-                  example: "user@example.com"
-                password:
-                  type: string
-                  example: "yourPassword123"
-                role:
-                  type: string
-                  example: "student"
-                phone:
-                  type: string
-                  example: "54 99999-9999"
-                student:
-                  type: object
-                  properties:
-                    enrollmentNumber:
-                      type: string
-                      example: "123456"
+              oneOf:
+                - $ref: '#/components/schemas/StudentRegister'
+                - $ref: '#/components/schemas/UserRegisterBase'
+            examples:
+              studentExample:
+                summary: Exemplo de cadastro de estudante
+                value:
+                  name: "John Doe"
+                  mail: "user@example.com"
+                  password: "yourPassword123"
+                  role: "student"
+                  phone: "54 99999-9999"
+                  student:
+                    enrollmentNumber: "123456"
+              visitorExample:
+                summary: Exemplo de cadastro visitante
+                value:
+                  name: "Jane Visitor"
+                  mail: "visitor@example.com"
+                  password: "yourPassword123"
+                  role: "visitor"
+                  phone: "54 98888-7777"
       responses:
         "201":
           description: Usuário criado com sucesso
+
+  /auth/register-admin:
+    post:
+      tags:
+        - Auth
+      summary: Registra um novo usuário administrador
+      description: Cria uma conta com papel `admin` utilizando uma `adminKey` válida.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminRegister'
+            examples:
+              adminExample:
+                summary: Exemplo de cadastro de admin
+                value:
+                  name: "John Doe ADM"
+                  mail: ""
+                  password: "12345678"
+                  role: "admin"
+                  phone: "54 99999-9999"
+                  adminKey: ""
+                  admin:
+                    enrollmentNumber: "123456"
+      responses:
+        "201":
+          description: Admin criado com sucesso
+        "400":
+          description: Requisição inválida (campos faltando ou formato incorreto)
+        "401":
+          description: Não autenticado (se a rota exigir autenticação adicional)
+        "403":
+          description: adminKey inválida ou sem permissão
+        "409":
+          description: E-mail já cadastrado
+        "500":
+          description: Erro interno no servidor
 
   /auth/login:
     post:
@@ -78,6 +220,9 @@ paths:
                 password:
                   type: string
                   example: "yourPassword123"
+              required:
+                - mail
+                - password
       responses:
         "200":
           description: Login realizado com sucesso
@@ -97,6 +242,8 @@ paths:
                 mail:
                   type: string
                   example: "user@example.com"
+              required:
+                - mail
       responses:
         "200":
           description: Solicitação de redefinição enviada
@@ -127,6 +274,8 @@ paths:
                 newPassword:
                   type: string
                   example: "newPassword123"
+              required:
+                - newPassword
       responses:
         "200":
           description: Senha redefinida com sucesso
@@ -355,7 +504,7 @@ paths:
           description: Não autorizado
         "500":
           description: Erro interno no servidor
-  
+
   /reservations/week:
     get:
       tags:
@@ -493,7 +642,7 @@ paths:
           description: Usuário não encontrado
         "500":
           description: Erro interno no servidor
-  
+
   /menu/menus:
     get:
       tags:
@@ -506,7 +655,7 @@ paths:
         "200":
           description: URL dos cardápios encontrados com sucesso
         "500":
-          description: Erro interno no servidor"
+          description: Erro interno no servidor
 
   /menu/upload:
     post:
@@ -543,5 +692,3 @@ paths:
           description: Acesso negado (usuário não autorizado a criar cardápios)
         "500":
           description: Erro interno no servidor
-        
-
