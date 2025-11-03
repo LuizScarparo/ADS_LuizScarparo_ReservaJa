@@ -1,5 +1,6 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import "./ManageReservationsScreen.css"; // <= importa os estilos desta página
 
 export default function ManageReservationsScreen() {
 
