@@ -12,7 +12,7 @@
   }
   
   /* fundo geral da página */
-  .about-page {
+  .reservations-page {
     min-height: 60vh;
     width: 100%;
     background: var(--beige-1);
@@ -20,13 +20,13 @@
   }
   
   @media (min-width: 768px) {
-    .about-page {
+    .reservations-page {
       padding: 40px 24px;
     }
   }
   
   /* card branco central */
-  .about-card {
+  .reservations-card {
     max-width: 1120px;
     margin: 0 auto;
     background: #fff;
@@ -36,14 +36,14 @@
   }
   
   /* faixa superior bege */
-  .about-card__topbar {
+  .reservations-card__topbar {
     height: 64px;
     width: 100%;
     background: var(--main-green);
   }
   
   /* seção com grid: texto + badge */
-  .about-section {
+  .reservations-section {
     display: grid;
     gap: 24px;
     grid-template-columns: 1fr;
@@ -52,7 +52,7 @@
   }
   
   @media (min-width: 900px) {
-    .about-section {
+    .reservations-section {
       grid-template-columns: 1fr 280px;
       gap: 40px;
       padding: 40px 40px;
@@ -60,12 +60,12 @@
   }
   
   /* quando a seção é apenas texto (sem badge) */
-  .about-section--single {
+  .reservations-section--single {
     grid-template-columns: 1fr;
   }
   
   /* título laranja */
-  .about-title {
+  .reservations-title {
     margin: 0 0 12px;
     color: var(--orange);
     text-transform: uppercase;
@@ -75,13 +75,13 @@
   }
   
   @media (min-width: 900px) {
-    .about-title {
+    .reservations-title {
       font-size: 32px;
     }
   }
   
   /* parágrafo */
-  .about-paragraph {
+  .reservations-paragraph {
     margin: 0;
     line-height: 1.7;
     color: rgba(64, 62, 58, 0.92);
@@ -89,13 +89,13 @@
   }
   
   /* badge RU (direita) */
-  .about-badge {
+  .reservations-badge {
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .about-badge__img {
+  .reservations-badge__img {
     width: 224px;
     height: 224px;
     object-fit: contain;
@@ -105,7 +105,7 @@
   }
   
   /* placeholder caso não tenha a imagem do logo */
-  .about-badge__placeholder {
+  .reservations-badge__placeholder {
     width: 224px;
     height: 224px;
     border-radius: 50%;
@@ -118,14 +118,14 @@
   }
   
   /* divisória */
-  .about-divider {
+  .reservations-divider {
     height: 1px;
     width: 100%;
     background: #e5e7eb;
   }
   
   /* faixa verde inferior */
-  .about-card__bottombar {
+  .reservations-card__bottombar {
     height: 80px;
     width: 100%;
   }
