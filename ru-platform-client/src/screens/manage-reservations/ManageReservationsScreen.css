@@ -1,0 +1,132 @@
+:root {
+    /* cores da tela (pode ajustar para ficar 1:1 com o Figma) */
+    --bg-dark: #1e1f22;
+    --beige-1: #f3ead2;
+    --beige-2: #f6eedc;
+    --orange:  #f08c21;
+    --green:   #3f8a3c;
+    --text-dark: #403e3a;
+  
+    --card-radius: 16px;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* fundo geral da página */
+  .reservations-page {
+    min-height: 60vh;
+    width: 100%;
+    background: var(--beige-1);
+    padding: 24px 16px;
+  }
+  
+  @media (min-width: 768px) {
+    .reservations-page {
+      padding: 40px 24px;
+    }
+  }
+  
+  /* card branco central */
+  .reservations-card {
+    max-width: 1120px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+  }
+  
+  /* faixa superior bege */
+  .reservations-card__topbar {
+    height: 64px;
+    width: 100%;
+    background: var(--main-green);
+  }
+  
+  /* seção com grid: texto + badge */
+  .reservations-section {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    color: var(--text-dark);
+  }
+  
+  @media (min-width: 900px) {
+    .reservations-section {
+      grid-template-columns: 1fr 280px;
+      gap: 40px;
+      padding: 40px 40px;
+    }
+  }
+  
+  /* quando a seção é apenas texto (sem badge) */
+  .reservations-section--single {
+    grid-template-columns: 1fr;
+  }
+  
+  /* título laranja */
+  .reservations-title {
+    margin: 0 0 12px;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 800;
+    font-size: 28px;
+  }
+  
+  @media (min-width: 900px) {
+    .reservations-title {
+      font-size: 32px;
+    }
+  }
+  
+  /* parágrafo */
+  .reservations-paragraph {
+    margin: 0;
+    line-height: 1.7;
+    color: rgba(64, 62, 58, 0.92);
+    max-width: 70ch;
+  }
+  
+  /* badge RU (direita) */
+  .reservations-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .reservations-badge__img {
+    width: 224px;
+    height: 224px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: var(--beige-2);
+    padding: 12px;
+  }
+  
+  /* placeholder caso não tenha a imagem do logo */
+  .reservations-badge__placeholder {
+    width: 224px;
+    height: 224px;
+    border-radius: 50%;
+    background: var(--beige-2);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--orange);
+  }
+  
+  /* divisória */
+  .reservations-divider {
+    height: 1px;
+    width: 100%;
+    background: #e5e7eb;
+  }
+  
+  /* faixa verde inferior */
+  .reservations-card__bottombar {
+    height: 80px;
+    width: 100%;
+  }
+  
