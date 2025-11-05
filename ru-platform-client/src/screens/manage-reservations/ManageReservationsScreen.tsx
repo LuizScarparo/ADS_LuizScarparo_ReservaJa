@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import api from "../../api/api"; // <- default import, igual ao seu arquivo
+import api from "../../api/api"; 
 import "./ManageReservationsScreen.css";
 import React from "react";
 
 /** Tipos (ajuste se o backend retornar campos diferentes) */
-type ReservationStatus = "PENDING" | "CONFIRMED" | "ABSENT" | "CANCELED" | "CHECKED" | "DONE" | string;
+type ReservationStatus = "pending" | "consumed" | "no_show" | string;
 type MealType = "Almoço" | "Jantar" | string;
 type UserType = "Aluno" | "Professor" | "Servidor" | string;
 
