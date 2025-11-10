@@ -49,6 +49,7 @@ export default function LoginScreen() {
                     const userData = jwtDecode(token);
                     userData.token = token;
                     login(userData);
+                    localStorage.setItem("token", token);
                     navigate('/home');
                 }
             } catch (error) {

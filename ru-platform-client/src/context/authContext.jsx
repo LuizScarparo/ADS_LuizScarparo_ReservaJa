@@ -54,16 +54,18 @@ export const AuthProvider = ({ children }) => {
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
+    if (userData?.token) localStorage.setItem("token", userData.token);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
-  // ✅ expõe token e um helper para buscá-lo com fallback no localStorage
   const getToken = () => {
     if (user?.token) return user.token;
+
     try {
       const saved = localStorage.getItem("user");
       return saved ? JSON.parse(saved).token : undefined;
