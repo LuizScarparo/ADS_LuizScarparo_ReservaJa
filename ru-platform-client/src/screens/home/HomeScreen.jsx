@@ -3,14 +3,20 @@ import CarouselMenu from '../../components/carousel-menu/CarouselMenu';
 import { useAuth } from '../../context/authContext.jsx';
 import EditMenuDialog from '../../components/edit-menu-dialog/EditMenuDialog.jsx';
 import './HomeScreen.css';
+import ScheduleDialog from '../schedule-reservations/ScheduleDialog.jsx';
 
 export default function HomeScreen() {
+  const [open, setOpen] = useState(false);
   const { user, getToken } = useAuth();
   const userRole = user?.role || 'visitor';
   const userName = user?.name || '';
   const userFirstName = userName ? userName.split(' ')[0] : '';
 
   const [editOpen, setEditOpen] = useState(false);
+
+  function reloadAfterSuccess() {
+    // recarregue a lista de reservas aqui, se precisar
+  }
 
   return (
     <>
@@ -37,7 +43,12 @@ export default function HomeScreen() {
           </div>
 
           <div className="btn-wrapper">
-            <button type='button' className='scheduler-btn'>Agendar</button>
+            <button type='button' className='scheduler-btn' onClick={() => setOpen(true)}>Agendar</button>
+            <ScheduleDialog
+              open={open}
+              onClose={() => setOpen(false)}
+              onSuccess={reloadAfterSuccess}
+            />
           </div>
         </div>
       </div>

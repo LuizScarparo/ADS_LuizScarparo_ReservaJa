@@ -1,0 +1,140 @@
+/* Overlay */
+.sched-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  
+  /* Modal */
+  .sched-modal {
+    width: 580px;
+    max-width: 92vw;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    overflow: hidden;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  
+  /* Header */
+  .sched-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid #eee0c6;
+  }
+  
+  .sched-header h2 {
+    font-size: 22px;
+    color: #e77718; /* laranja RU */
+    margin: 0;
+    font-weight: 700;
+  }
+  
+  .sched-close {
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #999;
+  }
+  .sched-close:hover { color: #666; }
+  
+  /* Body */
+  .sched-body {
+    padding: 22px;
+  }
+  
+  .sched-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+  
+  .sched-date {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sched-ico { font-size: 18px; }
+  .sched-date input[type="date"] {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .sched-week {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .sched-group-title {
+    margin: 6px 0 10px;
+    color: #444;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .sched-meals {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 18px;
+  }
+  
+  .sched-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .sched-error {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #ffe9e9;
+    color: #b20000;
+    border: 1px solid #ffbebe;
+    font-size: 13px;
+  }
+  
+  /* Actions */
+  .sched-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  
+  .sched-primary {
+    background: #e77718;
+    color: #fff;
+    border: 0;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    cursor: pointer;
+    transition: transform .02s ease-in-out, filter .12s ease-in-out;
+  }
+  .sched-primary:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+  .sched-primary:not(:disabled):active {
+    transform: translateY(1px);
+  }
+  
