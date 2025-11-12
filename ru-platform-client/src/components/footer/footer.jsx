@@ -29,9 +29,9 @@ export default function Footer() {
 
         {showNav && (
           <nav className="footer-nav">
-            <NavLink to="/home" className="footer-link" activeClassName="active">Home</NavLink>
-            <NavLink to="/about" className="footer-link" activeClassName="active">Sobre Nós</NavLink>
-            <NavLink to="/my-reservations" className="footer-link" activeClassName="active">Meus Agendamentos</NavLink>
+            <NavLink to="/home" className="footer-link" activeClassName="active">Início</NavLink>
+            <NavLink to="/about" className="footer-link" activeClassName="active">Quem Somos</NavLink>
+            <NavLink to="/my-reservations" className="footer-link" activeClassName="active">Minhas Reservas</NavLink>
             {userRole === 'admin' && (
               <NavLink to="/manage-reservations" className="footer-link" activeClassName="active">Gerenciar Reservas
               </NavLink>
