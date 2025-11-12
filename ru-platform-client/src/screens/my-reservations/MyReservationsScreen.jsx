@@ -122,11 +122,10 @@ export default function MyReservationsScreen() {
         }
     }
 
-    function handleEdit(row) {
+function handleEdit(row) {
         // placeholder: podemos abrir um dialog para marcar/desmarcar almoço/jantar e dar PATCH /reservations/{id}
-        alert("Em breve: editar agendamento (Almoço/Jantar) por dia.\nPosso implementar agora se quiser 😉");
+        alert("Em breve: Editar agendamento (Almoço/Jantar) por dia.\nPosso implementar agora se quiser 😉");
     }
-
     const label = weekLabel();
 
     return (
@@ -134,7 +133,7 @@ export default function MyReservationsScreen() {
             <Header />
             <div className="myres-page">
                 <header className="myres-header">
-                    <h1>MEUS AGENDAMENTOS</h1>
+                    <h1>AGENDAMENTOS</h1>
                     <p className="myres-sub">{label}</p>
                 </header>
 
@@ -144,7 +143,7 @@ export default function MyReservationsScreen() {
                             <tr>
                                 <th>DATA</th>
                                 <th>REFEIÇÃO</th>
-                                <th>STATUS</th>
+                                <th>SITUAÇÃO</th>
                                 <th>OPÇÕES</th>
                             </tr>
                         </thead>
@@ -156,7 +155,7 @@ export default function MyReservationsScreen() {
                                 <tr><td colSpan={4} className="center error">{err}</td></tr>
                             )}
                             {!loading && !err && rows.length === 0 && (
-                                <tr><td colSpan={4} className="center muted">Nenhum agendamento.</td></tr>
+                                <tr><td colSpan={4} className="center muted">Nenhum agendamento localizado.</td></tr>
                             )}
 
                             {!loading && !err && rows.map((r) => (
