@@ -226,7 +226,7 @@ export default function ManageReservationsScreen() {
               <th>NOME</th>
               <th>TIPO</th>
               <th>REFEIÇÃO</th>
-              <th>STATUS</th>
+              <th>SITUAÇÃO</th>
             </tr>
           </thead>
           <tbody>
