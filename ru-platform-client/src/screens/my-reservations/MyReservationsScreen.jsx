@@ -106,7 +106,7 @@ export default function MyReservationsScreen() {
     const total = rows.length;
 
     async function handleDelete(row) {
-        if (!window.confirm("Cancelar as refeições deste dia?")) return;
+        if (!window.confirm("Cancelar as reservas deste dia?")) return;
         try {
             // cancela apenas as que estão reservadas (lunch/dinner)
             const meals = [];
@@ -124,7 +124,7 @@ export default function MyReservationsScreen() {
 
 function handleEdit(row) {
         // placeholder: podemos abrir um dialog para marcar/desmarcar almoço/jantar e dar PATCH /reservations/{id}
-        alert("Em breve: Editar agendamento (Almoço/Jantar) por dia.\nPosso implementar agora se quiser 😉");
+        alert("Em breve: Editar reservas (Almoço/Jantar) por dia.\nPosso implementar agora se quiser 😉");
     }
     const label = weekLabel();
 
@@ -133,7 +133,7 @@ function handleEdit(row) {
             <Header />
             <div className="myres-page">
                 <header className="myres-header">
-                    <h1>AGENDAMENTOS</h1>
+                    <h1>RESERVAS</h1>
                     <p className="myres-sub">{label}</p>
                 </header>
 
