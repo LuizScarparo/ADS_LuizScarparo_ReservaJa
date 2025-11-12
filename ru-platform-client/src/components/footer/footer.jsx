@@ -33,8 +33,7 @@ export default function Footer() {
             <NavLink to="/about" className="footer-link" activeClassName="active">Sobre Nós</NavLink>
             <NavLink to="/my-reservations" className="footer-link" activeClassName="active">Meus Agendamentos</NavLink>
             {userRole === 'admin' && (
-              <NavLink to="/manage-reservations" className="footer-link" activeClassName="active">
-                Gerenciar Reservas
+              <NavLink to="/manage-reservations" className="footer-link" activeClassName="active">Gerenciar Reservas
               </NavLink>
             )}
           </nav>
