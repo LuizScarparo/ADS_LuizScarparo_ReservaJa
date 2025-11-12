@@ -29,9 +29,9 @@ export default function Header() {
           </button>
 
           <nav className="nav-area desktop-nav">
-            <NavLink to="/home" className="nav-link">Home</NavLink>
-            <NavLink to="/about" className="nav-link">Sobre Nós</NavLink>
-            <NavLink to="/my-reservations" className="nav-link" activeClassName="active">Meus Agendamentos</NavLink>
+            <NavLink to="/home" className="nav-link">Início</NavLink>
+            <NavLink to="/about" className="nav-link">Quem Somos</NavLink>
+            <NavLink to="/my-reservations" className="nav-link" activeClassName="active">Minhas Reservas</NavLink>
             {userRole === 'admin' && (
               <NavLink to="/manage-reservations" className="nav-link">Gerenciar Reservas</NavLink>
             )}
@@ -44,9 +44,10 @@ export default function Header() {
         <button className="close-btn" onClick={closeMenu} aria-label="Fechar menu">
           <FiX size={24} />
         </button>
-        <NavLink to="/home" className="nav-link" onClick={closeMenu}>Home</NavLink>
-        <NavLink to="/about" className="nav-link" onClick={closeMenu}>Sobre Nós</NavLink>
-        <NavLink to="/my-reservations" className="nav-link" onClick={closeMenu}>Meus Agendamentos</NavLink>
+        <NavLink to="/home" className="nav-link" onClick={closeMenu}>Início</NavLink>
+        <NavLink to="/about" className="nav-link" onClick={closeMenu}>Quem Somos</NavLink>
+        <NavLink to="/my-reservations" className="nav-link" onClick={closeMenu}>Minhas Reservas</NavLink>
+         {/* Menu do administrador */}
         {userRole === 'admin' && (
           <NavLink to="/manage-reservations" className="nav-link" onClick={closeMenu}>Gerenciar Reservas</NavLink>
         )}
