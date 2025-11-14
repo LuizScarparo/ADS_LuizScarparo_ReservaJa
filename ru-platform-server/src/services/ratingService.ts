@@ -145,35 +145,76 @@ class RatingService {
   // src/services/ratingService.ts
 
   static async listRatingsByMeal(params: { date: string; mealType: MealType }) {
-  const { date, mealType } = params;
+    const { date, mealType } = params;
 
-  // Remove o orderBy para não exigir índice composto
-  const snap = await db
-    .collection("mealRatings")
-    .where("date", "==", date)
-    .where("mealType", "==", mealType)
-    .get();
+    // Remove o orderBy para não exigir índice composto
+    const snap = await db
+      .collection("mealRatings")
+      .where("date", "==", date)
+      .where("mealType", "==", mealType)
+      .get();
 
-  const items = snap.docs.map((doc) => {
-    const data = doc.data() as any;
-    return {
-      id: doc.id,
-      userId: data.userId,
-      rating: data.rating,
-      comment: data.comment ?? "",
-      createdAt: data.createdAt, // Timestamp do Firestore
-    };
-  });
+    const items = snap.docs.map((doc) => {
+      const data = doc.data() as any;
+      return {
+        id: doc.id,
+        userId: data.userId,
+        rating: data.rating,
+        comment: data.comment ?? "",
+        createdAt: data.createdAt, // Timestamp do Firestore
+      };
+    });
 
-  // Ordena em memória por createdAt (mais recente primeiro)
-  items.sort((a, b) => {
-    const ta = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
-    const tb = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
-    return tb - ta;
-  });
+    // Ordena em memória por createdAt (mais recente primeiro)
+    items.sort((a, b) => {
+      const ta = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+      const tb = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+      return tb - ta;
+    });
 
-  return items;
-}
+    return items;
+  }
+
+  static async getLast7DaysSummary() {
+    const results: Array<{
+      date: string;
+      lunch: { count: number; average: number };
+      dinner: { count: number; average: number };
+    }> = [];
+
+    const today = new Date();
+    const msPerDay = 24 * 60 * 60 * 1000;
+
+    for (let offset = 0; offset < 7; offset++) {
+      const d = new Date(today.getTime() - offset * msPerDay);
+      const dateStr = d.toISOString().slice(0, 10); // YYYY-MM-DD
+
+      const lunchSummary = await this.getSummary({
+        date: dateStr,
+        mealType: "lunch",
+      });
+
+      const dinnerSummary = await this.getSummary({
+        date: dateStr,
+        mealType: "dinner",
+      });
+
+      results.push({
+        date: dateStr,
+        lunch: {
+          count: lunchSummary.count,
+          average: lunchSummary.average,
+        },
+        dinner: {
+          count: dinnerSummary.count,
+          average: dinnerSummary.average,
+        },
+      });
+    }
+
+    return results;
+  }
+
 
 }
 

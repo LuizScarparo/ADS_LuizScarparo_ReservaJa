@@ -14,3 +14,8 @@ export async function getRatingsList(date, mealType) {
   });
   return res.data?.data ?? [];
 }
+
+export async function getLast7Summary() {
+  const res = await api.get("/ratings/summary/last7");
+  return res.data?.data ?? [];
+}

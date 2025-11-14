@@ -24,4 +24,11 @@ router.get(
   RatingController.getListForMeal
 );
 
+router.get(
+  "/summary/last7",
+  authMiddleware,
+  adminMiddleware,
+  RatingController.getLast7Summary
+);
+
 export default router;

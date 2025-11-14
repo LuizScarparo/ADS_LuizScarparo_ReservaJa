@@ -273,6 +273,83 @@
   color: #7b6a4e;
 }
 
+/* Últimos 7 dias (visão geral) */
+.ard-last7 {
+  margin-bottom: 18px;
+}
+
+.ard-last7-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ard-last7-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+.ard-last7-status {
+  font-size: 12px;
+  color: #7b6a4e;
+}
+
+.ard-last7-error {
+  color: #c62828;
+}
+
+.ard-last7-empty {
+  font-size: 13px;
+  color: #7b6a4e;
+}
+
+.ard-last7-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.ard-last7-table thead {
+  background: #ffe8c4;
+}
+
+.ard-last7-table th,
+.ard-last7-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f3e0b5;
+  text-align: left;
+}
+
+.ard-last7-table th {
+  font-weight: 600;
+  color: #7b5a2b;
+}
+
+.ard-last7-table tbody tr:nth-child(even) {
+  background: #fffaf0;
+}
+
+.ard-last7-avg {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.ard-last7-count {
+  font-size: 12px;
+  color: #7b6a4e;
+}
+
+.ard-last7-none {
+  color: #aaa;
+}
+
+
 /* Responsivo */
 @media (max-width: 900px) {
   .ard-summary-grid {
