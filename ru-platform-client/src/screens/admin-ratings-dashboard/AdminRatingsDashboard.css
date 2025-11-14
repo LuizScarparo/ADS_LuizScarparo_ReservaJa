@@ -1,0 +1,291 @@
+/* Layout geral */
+.ard-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.ard-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 40px;
+  background: #fff8e9;
+}
+
+.ard-card {
+  width: 100%;
+  max-width: 1000px;
+  background: #fffdf7;
+  border-radius: 18px;
+  border: 1px solid #f1dab0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  padding: 24px 32px 30px;
+}
+
+/* Cabeçalho */
+.ard-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.ard-title {
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: #f07a1a;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.ard-subtitle {
+  font-size: 13px;
+  color: #7b6a4e;
+}
+
+/* Filtros */
+.ard-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 14px 0 14px;
+  border-top: 1px solid #f3e0b5;
+  border-bottom: 1px solid #f3e0b5;
+  margin-bottom: 16px;
+}
+
+.ard-field {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ard-field-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #c67628;
+  letter-spacing: 0.06em;
+}
+
+.ard-input {
+  border-radius: 10px;
+  border: 1px solid #e2d4b2;
+  padding: 7px 10px;
+  font-size: 14px;
+  background: #fffefe;
+}
+
+.ard-input:focus {
+  outline: none;
+  border-color: #f28a1a;
+  box-shadow: 0 0 0 1px rgba(242, 138, 26, 0.18);
+}
+
+.ard-meal-options {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.ard-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #444;
+}
+
+.ard-radio input[type="radio"] {
+  accent-color: #f28a1a;
+}
+
+.ard-field-button {
+  align-items: flex-end;
+}
+
+.ard-load-button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #f28a1a;
+  background: #f28a1a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.ard-load-button:hover {
+  background: #df7e16;
+  transform: translateY(-1px);
+}
+
+.ard-load-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+
+/* Erro */
+.ard-error {
+  margin-top: 8px;
+  color: #c62828;
+  font-size: 13px;
+}
+
+/* Resumo */
+.ard-summary {
+  margin-top: 14px;
+}
+
+.ard-summary-header {
+  font-size: 13px;
+  color: #7b6a4e;
+  margin-bottom: 10px;
+}
+
+.ard-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ard-summary-card {
+  background: #fff9ec;
+  border-radius: 12px;
+  border: 1px solid #f1dab0;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ard-summary-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #b26b25;
+  letter-spacing: 0.05em;
+}
+
+.ard-summary-main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ard-summary-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #444;
+}
+
+.ard-summary-stars {
+  font-size: 18px;
+  color: #f28a1a;
+}
+
+.ard-summary-dist {
+  grid-column: span 1;
+}
+
+.ard-summary-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ard-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.ard-bar-label {
+  width: 32px;
+}
+
+.ard-bar-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: #f3e0b5;
+  overflow: hidden;
+}
+
+.ard-bar-fill {
+  height: 100%;
+  background: #f28a1a;
+  border-radius: inherit;
+}
+
+.ard-bar-count {
+  width: 30px;
+  text-align: right;
+}
+
+/* Tabela */
+.ard-table-wrapper {
+  margin-top: 18px;
+}
+
+.ard-table-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.ard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ard-table thead {
+  background: #ffe8c4;
+}
+
+.ard-table th,
+.ard-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f3e0b5;
+  text-align: left;
+}
+
+.ard-table th {
+  font-weight: 600;
+  color: #7b5a2b;
+}
+
+.ard-table tbody tr:nth-child(even) {
+  background: #fffaf0;
+}
+
+.ard-no-data {
+  margin-top: 12px;
+  font-size: 13px;
+  text-align: center;
+  color: #7b6a4e;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .ard-summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .ard-card {
+    padding: 18px 14px 24px;
+  }
+
+  .ard-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

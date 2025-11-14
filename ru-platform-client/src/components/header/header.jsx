@@ -32,6 +32,7 @@ export default function Header() {
             <NavLink to="/home" className="nav-link">Início</NavLink>
             <NavLink to="/about" className="nav-link">Quem Somos</NavLink>
             <NavLink to="/my-reservations" className="nav-link" activeClassName="active">Minhas Reservas</NavLink>
+            <NavLink to="/rating" className="nav-link" activeClassName="active">Avaliações</NavLink>
             {userRole === 'admin' && (
               <NavLink to="/manage-reservations" className="nav-link">Gerenciar Reservas</NavLink>
             )}
@@ -47,9 +48,13 @@ export default function Header() {
         <NavLink to="/home" className="nav-link" onClick={closeMenu}>Início</NavLink>
         <NavLink to="/about" className="nav-link" onClick={closeMenu}>Quem Somos</NavLink>
         <NavLink to="/my-reservations" className="nav-link" onClick={closeMenu}>Minhas Reservas</NavLink>
+        <NavLink to="/rating" className="nav-link" activeClassName="active">Avaliações</NavLink>
          {/* Menu do administrador */}
         {userRole === 'admin' && (
           <NavLink to="/manage-reservations" className="nav-link" onClick={closeMenu}>Gerenciar Reservas</NavLink>
+        )}
+        {userRole === 'admin' && (
+          <NavLink to="/admin/ratings" className="nav-link" onClick={closeMenu}>Gerenciar Avaliações</NavLink>
         )}
       </div>
 

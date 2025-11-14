@@ -10,6 +10,8 @@ import AboutScreen from "../screens/about/AboutScreen";
 import MyReservationsScreen from "../screens/my-reservations/MyReservationsScreen";
 import ManageReservationsScreen from "../screens/manage-reservations/ManageReservationsScreen";
 import { useAuth } from "../context/authContext";
+import MealRatingPage from "../screens/meal-rating-page/MealRatingPage";
+import AdminRatingsDashboard from "../screens/admin-ratings-dashboard/AdminRatingsDashboard";
 
 const ProtectedRoute = ({ isAllowed }) => {
     const { user } = useAuth();
@@ -44,6 +46,7 @@ function AppRoutes() {
                     <Route path="/about" element={<MainLayout><AboutScreen/></MainLayout>} />
                     <Route path="/home" element={<MainLayout><HomeScreen/></MainLayout>} />
                     <Route path="/my-reservations" element={<MainLayout><MyReservationsScreen/></MainLayout>} />
+                    <Route path="/rating" element={<MealRatingPage />} />
                 </Route>
 
                 {/* Private routes (admin) */}
@@ -51,6 +54,7 @@ function AppRoutes() {
                     <ProtectedRoute isAllowed={["admin"]} />
                 }>
                     <Route path="/manage-reservations" element={<MainLayout><ManageReservationsScreen/></MainLayout>} />
+                    <Route path="/admin/ratings" element={<AdminRatingsDashboard />} />
                 </Route>
             </Routes>
         </Router>

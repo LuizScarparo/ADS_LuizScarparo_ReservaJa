@@ -1,0 +1,133 @@
+.mr-loading {
+  font-size: 14px;
+  color: #666;
+}
+
+.mr-container {
+  background: #fffdf7;
+  border-radius: 14px;
+  border: 1px solid #f3e0b5;
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mr-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #f3e0b5;
+  padding-bottom: 10px;
+}
+
+.mr-label-top {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #c67628;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.mr-date,
+.mr-meal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.mr-stars-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.mr-stars-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+}
+
+.mr-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.mr-star {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #e3c8a4;
+  padding: 0;
+  line-height: 1;
+  transition: transform 0.1s ease, color 0.1s ease;
+}
+
+.mr-star-selected {
+  color: #f28a1a;
+  transform: translateY(-1px);
+}
+
+.mr-comment-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #444;
+}
+
+.mr-textarea {
+  border-radius: 8px;
+  border: 1px solid #e0d4b7;
+  padding: 8px 10px;
+  resize: vertical;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fffefe;
+}
+
+.mr-textarea:focus {
+  outline: none;
+  border-color: #f28a1a;
+  box-shadow: 0 0 0 1px rgba(242, 138, 26, 0.2);
+}
+
+.mr-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.mr-message {
+  font-size: 12px;
+  color: #4c7a2b;
+}
+
+.mr-button {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid #f28a1a;
+  background: #f28a1a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.mr-button:hover {
+  background: #df7e16;
+  transform: translateY(-1px);
+}
+
+.mr-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}

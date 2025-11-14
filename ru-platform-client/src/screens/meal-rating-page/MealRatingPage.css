@@ -1,0 +1,158 @@
+:root {
+  --ru-primary: #f47a21;
+  --ru-primary-dark: #d96412;
+  --ru-soft-background: #fff7e0;
+  --ru-border-soft: #f3dfbd;
+  --ru-text-main: #5b4a32;
+  --ru-text-muted: #8a7b64;
+}
+
+.ratings-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.ratings-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 40px;
+  background: #fff;
+}
+
+.ratings-container {
+  width: 100%;
+  max-width: 960px;
+}
+
+.ratings-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ratings-title {
+  font-size: 28px;
+  letter-spacing: 0.12em;
+  color: var(--ru-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.ratings-subtitle {
+  font-size: 14px;
+  color: var(--ru-text-muted);
+}
+
+/* Card de filtros */
+
+.ratings-filter-card {
+  background: #fffdf7;
+  border-radius: 18px;
+  border: 1px solid var(--ru-border-soft);
+  padding: 18px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  margin-bottom: 18px;
+}
+
+.ratings-filter-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.ratings-field {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ratings-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ru-text-main);
+  text-transform: uppercase;
+}
+
+.ratings-input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #e2d3b8;
+  font-size: 14px;
+  color: var(--ru-text-main);
+  background: #fff;
+}
+
+.ratings-input:focus {
+  outline: none;
+  border-color: var(--ru-primary);
+  box-shadow: 0 0 0 1px rgba(244, 122, 33, 0.18);
+}
+
+.ratings-meal-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ratings-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #e2d3b8;
+  background: #fffaf1;
+  font-size: 13px;
+  color: var(--ru-text-main);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.ratings-chip input {
+  display: none;
+}
+
+.ratings-chip.selected {
+  border-color: var(--ru-primary);
+  background: #ffe4c4;
+  color: var(--ru-primary-dark);
+  font-weight: 600;
+}
+
+.ratings-chip:hover {
+  border-color: var(--ru-primary);
+}
+
+.ratings-hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--ru-text-muted);
+}
+
+/* Card da avaliação em si */
+
+.ratings-meal-card {
+  margin-top: 12px;
+  background: var(--ru-soft-background);
+  border: 1px solid var(--ru-border-soft);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Responsivo */
+
+@media (max-width: 600px) {
+  .ratings-main {
+    padding: 20px 10px 28px;
+  }
+
+  .ratings-filter-card,
+  .ratings-meal-card {
+    padding: 14px 14px 16px;
+  }
+}
