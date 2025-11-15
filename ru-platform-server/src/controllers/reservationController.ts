@@ -2,6 +2,13 @@ import { Request, Response } from 'express';
 import { reservationSchema, reservationUpdateSchema, reservationsStatusUpdateSchema, deleteReservationSchema } from '../schemas/reservationSchema';
 import ReservationService from '../services/reservationService';
 
+type MealType = "lunch" | "dinner";
+
+function isValidMealType(mealType: any): mealType is MealType {
+  return mealType === "lunch" || mealType === "dinner";
+}
+
+
 export class ReservationController {
     static async createReservation(req: Request, res: Response) {
         const validation = reservationSchema.safeParse(req.body);
@@ -160,5 +167,37 @@ export class ReservationController {
         }
 
     }
+
+    static async getStatsForMeal(req: Request, res: Response): Promise<void> {
+    try {
+      const { date, mealType } = req.query;
+
+      if (!date || mealType === undefined) {
+        res
+          .status(400)
+          .json({ message: "date e mealType são obrigatórios" });
+        return;
+      }
+
+      if (!isValidMealType(mealType)) {
+        res
+          .status(400)
+          .json({ message: "mealType deve ser 'lunch' ou 'dinner'" });
+        return;
+      }
+
+      const stats = await ReservationService.getStatsForMeal({
+        date: String(date),
+        mealType,
+      });
+
+      res.status(200).json({ data: stats });
+    } catch (err) {
+      console.error("Error fetching reservation stats:", err);
+      res
+        .status(500)
+        .json({ message: "Erro ao buscar estatísticas de reservas" });
+    }
+  }
 }
 

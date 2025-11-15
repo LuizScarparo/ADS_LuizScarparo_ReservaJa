@@ -4,6 +4,8 @@ import { IReservation } from "../interfaces/IReservation";
 import { v4 as uuidv4 } from "uuid";
 import { FieldValue } from "firebase-admin/firestore";
 
+type MealType = "lunch" | "dinner";
+
 class ReservationService {
   async createReservation(reservedDates: {}, userId: string, userName: string, userRole: string, userEnrollmentNumber?: string) {
     try {
@@ -298,7 +300,7 @@ class ReservationService {
           updatedAt: DateTime.now().setZone("America/Sao_Paulo").toISO(),
         });
         return { message: "Reservation status updated successfully." };
-        
+
       } else {
         throw new Error(`Meal ${meal} is not reserved for the date: ${day}`);
       }
@@ -355,14 +357,62 @@ class ReservationService {
   countReservations = async (reservations: IReservation[]) => {
     return reservations.reduce((total, reservation) => {
       const reservedDates = reservation.reservedDates || {};
-  
+
       return total + Object.values(reservedDates).reduce((subtotal, meals) => {
         return subtotal + (meals.lunch?.isReserved ? 1 : 0) + (meals.dinner?.isReserved ? 1 : 0);
       }, 0);
-  
+
     }, 0);
   };
-  
+
+  async getStatsForMeal(params: { date: string; mealType: MealType }) {
+    const { date, mealType } = params;
+
+    const snap = await db.collection("reservations").get();
+
+    let totalReserved = 0;
+    let consumed = 0;
+
+    const notConsumedUsers: Array<{
+      userId: string;
+      name: string;
+      enrollmentNumber: string;
+    }> = [];
+
+    snap.forEach((doc) => {
+      const data = doc.data() as any;
+      const reservedDates = data.reservedDates || {};
+      const dayInfo = reservedDates[date];
+      if (!dayInfo) return;
+
+      const mealInfo = dayInfo[mealType];
+      if (!mealInfo?.isReserved) return;
+
+      totalReserved++;
+
+      if (mealInfo.status === "consumed") {
+        consumed++;
+      } else {
+        // adicionar na lista dos que NÃO consumiram
+        notConsumedUsers.push({
+          userId: data.user?.id ?? "unknown",
+          name: data.user?.name ?? "Sem nome",
+          enrollmentNumber: data.user?.enrollmentNumber ?? "N/A",
+        });
+      }
+    });
+
+    const notConsumed = totalReserved - consumed;
+
+    return {
+      totalReserved,
+      consumed,
+      notConsumed,
+      notConsumedUsers,
+    };
+  }
+
+
 }
 
 export default new ReservationService();

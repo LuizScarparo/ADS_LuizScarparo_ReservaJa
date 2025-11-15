@@ -11,6 +11,7 @@ router.get('/', authMiddleware, adminMiddleware, ReservationController.getReserv
 router.get('/me', authMiddleware, ReservationController.getUserReservations);
 router.get('/day', authMiddleware, adminMiddleware, ReservationController.getTodayReservations);
 router.get('/week', authMiddleware, adminMiddleware, ReservationController.getWeekReservations);
+router.get("/stats", authMiddleware, adminMiddleware, ReservationController.getStatsForMeal);
 
 router.patch('/:id', authMiddleware, ReservationController.updateReservation);
 router.patch('/status/:id', authMiddleware, adminMiddleware, ReservationController.updateReservationStatus);

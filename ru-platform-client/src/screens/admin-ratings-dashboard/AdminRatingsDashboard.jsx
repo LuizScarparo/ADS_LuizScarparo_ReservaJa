@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import { getRatingSummary, getRatingsList, getLast7Summary } from "../../services/ratingService";
+import { getReservationStats } from "../../services/reservationServices";
 import "./AdminRatingsDashboard.css";
 
 export default function AdminRatingsDashboard() {
   const [date, setDate] = useState("");
   const [mealType, setMealType] = useState("lunch");
+
   const [loading, setLoading] = useState(false);
   const [summary, setSummary] = useState(null);
   const [list, setList] = useState([]);
@@ -18,23 +20,34 @@ export default function AdminRatingsDashboard() {
   const [loadingLast7, setLoadingLast7] = useState(true);
   const [errorLast7, setErrorLast7] = useState("");
 
+  const [reservationStats, setReservationStats] = useState(null);
+
   const hasSelection = Boolean(date && mealType);
   const mealLabel = mealType === "lunch" ? "Almoço" : "Jantar";
 
   async function loadData() {
     if (!hasSelection) return;
+
     setLoading(true);
     setError("");
+    setReservationStats(null);
+
     try {
-      const [s, l] = await Promise.all([
+      const [s, l, rStats] = await Promise.all([
         getRatingSummary(date, mealType),
         getRatingsList(date, mealType),
+        getReservationStats(date, mealType),
       ]);
+
       setSummary(s);
       setList(l);
+      setReservationStats(rStats);
     } catch (err) {
       console.error(err);
       setError("Erro ao carregar dados de avaliação.");
+      setSummary(null);
+      setList([]);
+      setReservationStats(null);
     } finally {
       setLoading(false);
     }
@@ -64,10 +77,12 @@ export default function AdminRatingsDashboard() {
 
       <main className="ard-main">
         <section className="ard-card">
+          {/* Cabeçalho principal */}
           <header className="ard-header">
             <h1 className="ard-title">PAINEL DE AVALIAÇÕES</h1>
             <p className="ard-subtitle">
-              Acompanhe as avaliações das refeições do Restaurante Universitário.
+              Acompanhe as avaliações e o consumo das refeições do Restaurante
+              Universitário.
             </p>
           </header>
 
@@ -139,8 +154,9 @@ export default function AdminRatingsDashboard() {
             )}
           </section>
 
-          {/* BLOCO: Filtro detalhado por dia/refeição */}
+          {/* BLOCO: Filtro detalhado + resumo do dia/refeição */}
           <section className="ard-daily">
+            {/* Filtros */}
             <div className="ard-filters">
               <div className="ard-field">
                 <span className="ard-field-label">Data</span>
@@ -192,63 +208,130 @@ export default function AdminRatingsDashboard() {
 
             {error && <p className="ard-error">{error}</p>}
 
+            {/* Resumo do dia/refeição selecionados */}
             {summary && (
-              <div className="ard-summary">
-                <div className="ard-summary-header">
-                  <span>
-                    {mealLabel} • {date}
-                  </span>
-                </div>
+              <>
+                <div className="ard-summary">
+                  <div className="ard-summary-header">
+                    <span>
+                      {mealLabel} • {date}
+                    </span>
+                  </div>
 
-                <div className="ard-summary-grid">
-                  <div className="ard-summary-card">
-                    <span className="ard-summary-label">Média</span>
-                    <div className="ard-summary-main">
-                      <span className="ard-summary-value">
-                        {summary.average.toFixed(1)}
+                  <div className="ard-summary-grid">
+                    {/* Card: média */}
+                    <div className="ard-summary-card">
+                      <span className="ard-summary-label">Média</span>
+                      <div className="ard-summary-main">
+                        <span className="ard-summary-value">
+                          {summary.average.toFixed(1)}
+                        </span>
+                        <span className="ard-summary-stars">★</span>
+                      </div>
+                    </div>
+
+                    {/* Card: total de avaliações */}
+                    <div className="ard-summary-card">
+                      <span className="ard-summary-label">
+                        Total de avaliações
                       </span>
-                      <span className="ard-summary-stars">★</span>
+                      <span className="ard-summary-value">
+                        {summary.count}
+                      </span>
                     </div>
-                  </div>
 
-                  <div className="ard-summary-card">
-                    <span className="ard-summary-label">
-                      Total de avaliações
-                    </span>
-                    <span className="ard-summary-value">
-                      {summary.count}
-                    </span>
-                  </div>
-
-                  <div className="ard-summary-card ard-summary-dist">
-                    <span className="ard-summary-label">Distribuição</span>
-                    <div className="ard-summary-bars">
-                      {[5, 4, 3, 2, 1].map((star) => {
-                        const value = summary.distribution?.[star] ?? 0;
-                        const perc =
-                          summary.count > 0
-                            ? (value / summary.count) * 100
-                            : 0;
-
-                        return (
-                          <div key={star} className="ard-bar-row">
-                            <span className="ard-bar-label">{star}★</span>
-                            <div className="ard-bar-track">
-                              <div
-                                className="ard-bar-fill"
-                                style={{ width: `${perc}%` }}
-                              />
-                            </div>
-                            <span className="ard-bar-count">{value}</span>
+                    {/* Card: Reservas x consumo (se disponível) */}
+                    {reservationStats && (
+                      <div className="ard-summary-card">
+                        <span className="ard-summary-label">
+                          Reservas x consumo
+                        </span>
+                        <div className="ard-reservations-info">
+                          <div>
+                            <span className="ard-res-label">Reservas:</span>{" "}
+                            <span className="ard-res-value">
+                              {reservationStats.totalReserved}
+                            </span>
                           </div>
-                        );
-                      })}
+                          <div>
+                            <span className="ard-res-label">Consumidas:</span>{" "}
+                            <span className="ard-res-value">
+                              {reservationStats.consumed}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="ard-res-label">
+                              Não consumidas:
+                            </span>{" "}
+                            <span className="ard-res-value ard-res-value-warn">
+                              {reservationStats.notConsumed}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Card: distribuição de notas */}
+                    <div className="ard-summary-card ard-summary-dist">
+                      <span className="ard-summary-label">Distribuição</span>
+                      <div className="ard-summary-bars">
+                        {[5, 4, 3, 2, 1].map((star) => {
+                          const value = summary.distribution?.[star] ?? 0;
+                          const perc =
+                            summary.count > 0
+                              ? (value / summary.count) * 100
+                              : 0;
+
+                          return (
+                            <div key={star} className="ard-bar-row">
+                              <span className="ard-bar-label">{star}★</span>
+                              <div className="ard-bar-track">
+                                <div
+                                  className="ard-bar-fill"
+                                  style={{ width: `${perc}%` }}
+                                />
+                              </div>
+                              <span className="ard-bar-count">
+                                {value}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+
+                {/* Lista de usuários que não consumiram */}
+                {reservationStats?.notConsumedUsers &&
+                  reservationStats.notConsumedUsers.length > 0 && (
+                    <div className="ard-no-consumed-wrapper">
+                      <h3 className="ard-no-consumed-title">
+                        Usuários que NÃO consumiram esta refeição
+                      </h3>
+
+                      <table className="ard-no-consumed-table">
+                        <thead>
+                          <tr>
+                            <th>Nome</th>
+                            <th>Matrícula</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {reservationStats.notConsumedUsers.map((u) => (
+                            <tr key={u.userId}>
+                              <td>{u.name}</td>
+                              <td>{u.enrollmentNumber}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+              </>
             )}
 
+            {/* Tabela de avaliações individuais */}
             {list.length > 0 && (
               <div className="ard-table-wrapper">
                 <h2 className="ard-table-title">Avaliações individuais</h2>
@@ -269,9 +352,7 @@ export default function AdminRatingsDashboard() {
                         <td>{item.comment || "-"}</td>
                         <td>
                           {item.createdAt?.toDate
-                            ? item.createdAt
-                                .toDate()
-                                .toLocaleString()
+                            ? item.createdAt.toDate().toLocaleString()
                             : ""}
                         </td>
                       </tr>
