@@ -128,7 +128,7 @@ export class ReservationController {
         }
 
         const { day, meal, status } = validation.data;
-
+        console.log(">>> updateStatus chamado", req.params, req.body);
         try {
             const reservation = await ReservationService.updateReservationStatus(id, day, meal, status);
             res.status(200).json(reservation);

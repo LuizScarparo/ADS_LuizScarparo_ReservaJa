@@ -5,7 +5,13 @@ import "./ManageReservationsScreen.css";
 /* ----------------- Helpers ----------------- */
 const BR = new Intl.DateTimeFormat("pt-BR");
 const fmtDate = (iso) => {
-  try { return BR.format(new Date(iso)); } catch { return iso; }
+  try {
+    const [y, m, d] = String(iso).split("-");
+    if (!y || !m || !d) return iso;
+    return `${d}/${m}/${y}`;
+  } catch {
+    return iso;
+  }
 };
 const contains = (hay, needle) =>
   String(hay || "").toLowerCase().includes(String(needle || "").toLowerCase());
@@ -31,6 +37,7 @@ function isISOWithinWeek(iso, ref = new Date()) {
   const dt = new Date(iso + "T00:00:00");
   return dt >= getMonday(ref) && dt <= getFriday(ref);
 }
+
 function formatWeekLabel(ref = new Date()) {
   const s = fmtDate(getMonday(ref).toISOString());
   const e = fmtDate(getFriday(ref).toISOString());
