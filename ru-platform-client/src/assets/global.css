@@ -13,29 +13,36 @@ body {
 }
 
 @font-face {
-    font-family: "Bolota";
-    src: url("/src/assets/fonts/bolota-bold.ttf") format("truetype");
+  font-family: "Bolota";
+  src: url("./fonts/bolota-bold.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "Century Gothic";
-    src: url("/fonts/century-gothic.ttf") format("truetype");
+  font-family: "Century Gothic";
+  src: url("./fonts/century-gothic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/montserrat.ttf") format("truetype");
 }
 
 :root {
-    --main-orange:   #E57D25;
-    --main-green:    #638439;
-    --main-marfim: #F2E8B9;
-    --main-white:      #FFFF;
-    --color-light:     #f5f5f5;
-  
-    --light-orange:   #E57D251A;
-    --light-gray:   #6B6B6B;
-    --color-danger:    #dc3545;
-    --color-danger:    #dc3545;
+  --main-orange: #E57D25;
+  --main-green: #638439;
+  --main-marfim: #F2E8B9;
+  --main-white: #FFFF;
+  --color-light: #f5f5f5;
+
+  --light-orange: #E57D251A;
+  --light-gray: #6B6B6B;
+  --color-danger: #dc3545;
+  --color-danger: #dc3545;
 
 
   --font-bolota: 'Bolota', sans-serif;
 
   --font-century: 'Century Gothic', 'Arial', sans-serif;
-  }
+
+  --font-montserrat: 'Montserrat', sans-serif;
+}
