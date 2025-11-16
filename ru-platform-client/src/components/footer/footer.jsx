@@ -29,11 +29,14 @@ export default function Footer() {
 
         {showNav && (
           <nav className="footer-nav">
-            <NavLink to="/home" className="footer-link" activeClassName="active">Início</NavLink>
-            <NavLink to="/about" className="footer-link" activeClassName="active">Quem Somos</NavLink>
+             <div className="footer-rights">
+                © 2025 Restaurante Universitário. Todos os direitos reservados.
+            </div>
           </nav>
         )}
       </div>
+
+     
     </footer>
   );
 }
