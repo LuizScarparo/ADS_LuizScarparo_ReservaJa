@@ -1,50 +1,53 @@
-.home-greeting-title{
-    font-family: var(--font-bolota);
-    font-size: 1.2rem;
-    color: var(--main-green);
-    text-align: left;
-    line-height: 100%;
-    letter-spacing: -0.010rem;
+.home-content {
+  /* compensa header fixo (seu header está fixed) */
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+
+  /* margem lateral responsiva */
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  max-width: 1120px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.home-content {
-    padding-top: 2rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    padding-bottom: 4.4rem;
-    box-sizing: border-box;
-    overflow: hidden;
+/* Saudação */
+.home-greeting-title {
+  font-family: var(--font-bolota);
+  font-size: 1.4rem;
+  color: var(--main-green);
+  text-align: left;
+  line-height: 1.1;
+  letter-spacing: -0.01rem;
+}
+
+/* Bloco principal: título + carrossel + botão */
+.home-meal-reservation-content {
+  padding-top: 2.5rem;
+}
+
+/* Wrapper do título + botão "Editar Cardápio" */
+.title-edit-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .home-title {
-    font-family: var(--font-bolota);
-    font-size: 2rem;
-    color: var(--main-orange);
-    text-align: center;
-    line-height: 100%;
-    letter-spacing: -0.010rem;
+  font-family: var(--font-bolota);
+  font-size: 2rem;
+  color: var(--main-orange);
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: -0.01rem;
 }
 
-.home-meal-reservation-content{
-    padding-top: 3rem;
-}
-
-.home-meal-reservation-content{
-    padding-top: 3rem;
-}
-
-.title-edit-wrapper{
-    position: relative;
-    text-align: center;
-}
-
+/* Botão editar cardápio (desktop) */
 .edit-menu-btn {
-  position: absolute;
-  width: 12rem;
-  height: 3rem;
-  right: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left: auto;
   background-color: var(--main-green);
   color: #fff;
   padding: 0.5rem 1.5rem;
@@ -54,14 +57,39 @@
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.btn-wrapper{
-    display: flex;
-    justify-content: center;
-    padding-top: 4rem;
+/* Carrossel centralizado */
+.home-carousel {
+  margin-top: 1rem;
 }
 
+/* Wrapper do botão "Agendar" */
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.scheduler-btn {
+  display: inline-flex;
+  min-width: 11rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-orange);
+  color: #fff;
+  font-family: var(--font-century);
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+/* Loading global (caso use em algum lugar) */
 .global-loading {
   display: flex;
   justify-content: center;
@@ -70,19 +98,65 @@
   background-color: #ffffff;
 }
 
-.scheduler-btn{
-    display: flex;
-    width: 12rem;
-    height: 3rem;
+/* ========= RESPONSIVIDADE ========= */
+
+/* Tablets / largura <= 900px */
+@media (max-width: 900px) {
+  .home-content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 5.5rem;
+  }
+
+  .title-edit-wrapper {
     justify-content: center;
-    align-items: center;
-    background-color: var(--main-orange);
-    color: #fff;
-    font-family: var(--font-century);
-    font-weight: 400;
-    font-size: 18px;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 1rem;
+  }
+
+  .edit-menu-btn {
+    margin-left: 0;
+  }
+}
+
+/* Celulares / largura <= 768px */
+@media (max-width: 768px) {
+  .home-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 5rem;
+  }
+
+  .home-greeting-title {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+
+  .home-title {
+    font-size: 1.6rem;
+  }
+
+  .title-edit-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .edit-menu-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .btn-wrapper {
+    padding-top: 2rem;
+  }
+
+  .scheduler-btn {
+    width: 100%;
+  }
+}
+
+/* Telas bem grandes */
+@media (min-width: 1400px) {
+  .home-content {
+    max-width: 1200px;
+  }
 }

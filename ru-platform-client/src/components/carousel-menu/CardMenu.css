@@ -6,20 +6,31 @@
 }
 
 .card-image {
-  margin-top: 50px;  
+  margin-top: 40px;
   opacity: 0.6;
   transform: scale(0.9);
   transition: all 0.3s ease;
+
   max-width: 100%;
   width: 390px;
   max-height: 240px;
-  object-fit: contain;   
+  object-fit: contain;
 }
 
 /* Card central destacado (via .slick-center) */
 .slick-center .card-menu .card-image {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1);
   opacity: 1;
   z-index: 2;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ========= RESPONSIVIDADE ========= */
+
+@media (max-width: 768px) {
+  .card-image {
+    margin-top: 24px;
+    width: 100%;
+    max-height: 220px;
+  }
 }
