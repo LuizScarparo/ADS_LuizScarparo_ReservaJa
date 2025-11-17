@@ -3,9 +3,11 @@ import { NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./header.css";
 import { useAuth } from "../../context/authContext.jsx";
+import signOut from '../../assets/SignOut.svg'
+
 
 export default function Header() {
-  const { user } = useAuth();
+  const { user, logout  } = useAuth();
   const userRole = user?.role; // evita erro se user ainda não existir
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -67,6 +69,9 @@ export default function Header() {
                 Dashboard
               </NavLink>
             )}
+            <button className="logout-btn" onClick={logout} aria-label="Sair">
+              <img src={signOut} alt="Sign Out" className="logout-icon" />
+            </button>
           </nav>
 
           {/* Botão menu (mobile) */}

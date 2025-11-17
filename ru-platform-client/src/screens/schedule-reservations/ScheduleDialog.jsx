@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
+import calendar from '../../assets/CalendarBlank.svg'
+
 ;
 import "./ScheduleDialog.css";
 
@@ -134,7 +136,9 @@ export default function ScheduleDialog({
         <form className="sched-body" onSubmit={handleSubmit}>
           <div className="sched-row">
             <div className="sched-date">
-              <span className="sched-ico">📅</span>
+              <span className="sched-ico">
+                <img src={calendar} alt="Calendário" className="icon-calendar" />
+              </span>
               <input
                 type="date"
                 value={date}

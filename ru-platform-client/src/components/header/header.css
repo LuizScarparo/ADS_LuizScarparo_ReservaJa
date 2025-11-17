@@ -166,6 +166,46 @@
   z-index: 1050;
 }
 
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn:hover .logout-icon {
+  opacity: 0.8;
+}
+
+.logout-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.side-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.side-logout-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.side-logout-btn:hover {
+  opacity: 0.8;
+}
+
+
 /* ===== RESPONSIVIDADE ===== */
 
 /* Até 1024px: some nav central, mostra hambúrguer */
@@ -204,3 +244,4 @@
     font-size: 1rem;
   }
 }
+
