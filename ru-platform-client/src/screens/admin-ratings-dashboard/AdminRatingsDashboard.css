@@ -11,7 +11,8 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 5.5rem 1.5rem 4rem; /* compensa header fixo e dá espaço pro footer */
+  padding: 5.5rem 1.5rem 4rem;
+  /* compensa header fixo e dá espaço pro footer */
   background: #fff8e9;
 }
 
@@ -46,6 +47,14 @@
 .ard-subtitle {
   font-size: 13px;
   color: #7b6a4e;
+}
+
+.card-button {
+  margin-left: auto;
+}
+
+.card-button button {
+  margin-left: auto;
 }
 
 /* ============= FILTROS ============= */
@@ -114,14 +123,20 @@
 }
 
 .ard-load-button {
-  padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid #f28a1a;
-  background: #f28a1a;
+  display: inline-flex;
+  min-width: 11rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-orange);
   color: #fff;
-  font-size: 13px;
-  font-weight: 500;
+  font-family: var(--font-century);
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
   cursor: pointer;
+  border-radius: 1rem;
   transition: background 0.15s ease, transform 0.08s ease;
 }
 
@@ -275,7 +290,8 @@
 
 .ard-table {
   width: 100%;
-  min-width: 640px; /* garante scroll horizontal se precisar */
+  min-width: 640px;
+  /* garante scroll horizontal se precisar */
   border-collapse: collapse;
   font-size: 13px;
   background: #fff;

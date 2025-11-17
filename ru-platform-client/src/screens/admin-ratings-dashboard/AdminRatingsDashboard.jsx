@@ -193,16 +193,17 @@ export default function AdminRatingsDashboard() {
                   </label>
                 </div>
               </div>
-
-              <div className="ard-field ard-field-button">
-                <button
-                  type="button"
-                  className="ard-load-button"
-                  onClick={loadData}
-                  disabled={!hasSelection || loading}
-                >
-                  {loading ? "Carregando..." : "Carregar"}
-                </button>
+              <div className="card-button">
+                <div className="ard-field ard-field-button">
+                  <button
+                    type="button"
+                    className="ard-load-button"
+                    onClick={loadData}
+                    disabled={!hasSelection || loading}
+                  >
+                    {loading ? "Carregando..." : "Carregar"}
+                  </button>
+                </div>
               </div>
             </div>
 
