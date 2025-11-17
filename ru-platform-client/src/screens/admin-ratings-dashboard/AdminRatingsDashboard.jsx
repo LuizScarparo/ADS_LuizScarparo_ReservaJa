@@ -342,7 +342,6 @@ export default function AdminRatingsDashboard() {
                       <th>Usuário</th>
                       <th>Nota</th>
                       <th>Comentário</th>
-                      <th>Data envio</th>
                     </tr>
                   </thead>
                   <tbody>
