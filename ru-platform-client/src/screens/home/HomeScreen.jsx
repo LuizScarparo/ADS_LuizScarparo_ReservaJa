@@ -13,9 +13,9 @@ export default function HomeScreen() {
   const userFirstName = userName ? userName.split(' ')[0] : '';
 
   const [editOpen, setEditOpen] = useState(false);
+  const [menuVersion, setMenuVersion] = useState(0);
 
   function reloadAfterSuccess() {
-    // recarregue a lista de reservas aqui, se precisar
   }
 
   return (
@@ -29,42 +29,49 @@ export default function HomeScreen() {
             <h1 className="home-title">Cardápio da Semana</h1>
             {userRole === 'admin' && (
               <button
-                type='button'
-                className='edit-menu-btn'
+                type="button"
+                className="edit-menu-btn"
                 onClick={() => setEditOpen(true)}
               >
                 Editar Cardápio
               </button>
             )}
-            <button type='button' className='scheduler-btn-top' onClick={() => setOpen(true)}>Agendar</button>
-            <ScheduleDialog
-              open={open}
-              onClose={() => setOpen(false)}
-              onSuccess={reloadAfterSuccess}
-            />
+            <button
+              type="button"
+              className="scheduler-btn-top"
+              onClick={() => setOpen(true)}
+            >
+              Agendar
+            </button>
           </div>
 
           <div className="home-carousel">
-            <CarouselMenu />
+            <CarouselMenu key={menuVersion} />
           </div>
 
           <div className="btn-wrapper">
-            <button type='button' className='scheduler-btn' onClick={() => setOpen(true)}>Agendar</button>
-            <ScheduleDialog
-              open={open}
-              onClose={() => setOpen(false)}
-              onSuccess={reloadAfterSuccess}
-            />
+            <button
+              type="button"
+              className="scheduler-btn"
+              onClick={() => setOpen(true)}
+            >
+              Agendar
+            </button>
           </div>
         </div>
       </div>
+
+      <ScheduleDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        onSuccess={reloadAfterSuccess}
+      />
 
       <EditMenuDialog
         isOpen={editOpen}
         onClose={() => setEditOpen(false)}
         onSaved={() => {
-          // se precisar, recarregue o carrossel aqui
-          // ex.: refreshMenus();
+          setMenuVersion((v) => v + 1);
         }}
         getToken={getToken}
       />
