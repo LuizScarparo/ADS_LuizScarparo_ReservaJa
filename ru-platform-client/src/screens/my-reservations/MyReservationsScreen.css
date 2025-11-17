@@ -1,13 +1,12 @@
 .myres-page {
-  /* compensa header fixo */
-  padding-top: 6rem;
+  padding-top: 1rem;
   padding-bottom: 4rem;
 
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
   max-width: 1120px;
-  margin: 0 auto;
+  margin: 1rem auto;
 
   font-family: var(--font-century);
   color: #333;
@@ -22,7 +21,7 @@
 
 .myres-header h1 {
   margin: 0;
-  font-size: 1.7rem;
+  font-size: 1.75rem;
   letter-spacing: 0.08em;
   color: var(--main-orange);
   font-weight: 700;
@@ -30,7 +29,7 @@
 
 .myres-sub {
   margin-top: 0.3rem;
-  color: #cc7d2b;
+  color: var(--ru-text-muted);
   font-size: 0.85rem;
 }
 
@@ -95,6 +94,7 @@
 .myres-actions {
   display: flex;
   gap: 0.4rem;
+  padding-left: 1rem;
 }
 
 .icon-btn {
@@ -108,6 +108,11 @@
   cursor: pointer;
   transition: filter 0.12s ease-in-out, transform 0.02s ease-in-out;
   font-size: 0.9rem;
+}
+
+.trash-icon {
+  height: 1rem;
+  width: 1rem;
 }
 
 .icon-btn:hover {
@@ -125,7 +130,7 @@
   .myres-page {
     padding-left: 1rem;
     padding-right: 1rem;
-    padding-top: 5.5rem;
+    padding-top: 1rem;
   }
 
   .myres-header h1 {
@@ -146,7 +151,7 @@
   .myres-page {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
-    padding-top: 5rem;
+    padding-top: 1rem;
   }
 
   .myres-header {

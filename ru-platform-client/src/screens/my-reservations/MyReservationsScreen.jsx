@@ -3,6 +3,8 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import api from "../../api/api";
 import "./MyReservationsScreen.css";
+import bin from '../../assets/bin.svg';
+
 
 
 const BR = new Intl.DateTimeFormat("pt-BR");
@@ -91,7 +93,6 @@ export default function MyReservationsScreen() {
             setErr(null);
             try {
                 const r = await api.get("/reservations/me");
-                // pode vir como { reservationId, reservedDates, ... } ou [{...}, ...]
                 const flat = flattenMe(r.data?.reservations ?? r.data);
                 const onlyWeek = flat.filter((it) => isISOWithinWeek(it.date));
                 setRows(onlyWeek);
@@ -108,12 +109,11 @@ export default function MyReservationsScreen() {
     async function handleDelete(row) {
         if (!window.confirm("Cancelar as reservas deste dia?")) return;
         try {
-            // cancela apenas as que estão reservadas (lunch/dinner)
             const meals = [];
             if (row.lunch) meals.push("lunch");
             if (row.dinner) meals.push("dinner");
             await api.delete(`/reservations/${row.reservationId}`, {
-                data: { day: row.date, meals }, // <- corpo esperado pelo backend
+                data: { day: row.date, meals },
             });
             // remove da UI
             setRows((prev) => prev.filter((r) => r.key !== row.key));
@@ -122,10 +122,7 @@ export default function MyReservationsScreen() {
         }
     }
 
-function handleEdit(row) {
-        // placeholder: podemos abrir um dialog para marcar/desmarcar almoço/jantar e dar PATCH /reservations/{id}
-        alert("Em breve: Editar reservas (Almoço/Jantar) por dia.\nPosso implementar agora se quiser 😉");
-    }
+
     const label = weekLabel();
 
     return (
@@ -144,7 +141,7 @@ function handleEdit(row) {
                                 <th>DATA</th>
                                 <th>REFEIÇÃO</th>
                                 <th>SITUAÇÃO</th>
-                                <th>OPÇÕES</th>
+                                <th>CANCELAR</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -166,10 +163,7 @@ function handleEdit(row) {
                                     <td>
                                         <div className="myres-actions">
                                             <button className="icon-btn" title="Excluir" onClick={() => handleDelete(r)}>
-                                                🗑
-                                            </button>
-                                            <button className="icon-btn" title="Editar" onClick={() => handleEdit(r)}>
-                                                ✎
+                                                 <img src={bin} alt="Excluir" className="trash-icon" />
                                             </button>
                                         </div>
                                     </td>

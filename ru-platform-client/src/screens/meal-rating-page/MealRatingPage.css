@@ -14,18 +14,24 @@
   background: #ffffff;
 }
 
+/* compensa header fixo em cima e footer embaixo */
 .ratings-main {
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 32px 16px 40px;
+  align-items: flex-start;
+  padding: 5.5rem 1.5rem 4rem; /* top pra não ficar debaixo do header */
   background: #fff;
+  box-sizing: border-box;
 }
 
 .ratings-container {
   width: 100%;
   max-width: 960px;
+  padding-top: 2rem;
 }
+
+/* ===== TÍTULO / SUBTÍTULO ===== */
 
 .ratings-header {
   text-align: center;
@@ -33,20 +39,22 @@
 }
 
 .ratings-title {
-  font-size: 28px;
+  font-size: 1.75rem;
   letter-spacing: 0.12em;
   color: var(--ru-primary);
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 4px;
+  font-family: var(--font-century);
 }
 
 .ratings-subtitle {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: var(--ru-text-muted);
+  font-family: var(--font-century);
 }
 
-/* Card de filtros */
+/* ===== CARD DE FILTROS ===== */
 
 .ratings-filter-card {
   background: #fffdf7;
@@ -61,6 +69,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
+  align-items: center;
 }
 
 .ratings-field {
@@ -75,6 +84,7 @@
   font-weight: 700;
   color: var(--ru-text-main);
   text-transform: uppercase;
+  font-family: var(--font-century);
 }
 
 .ratings-input {
@@ -84,6 +94,7 @@
   font-size: 14px;
   color: var(--ru-text-main);
   background: #fff;
+  font-family: var(--font-century);
 }
 
 .ratings-input:focus {
@@ -91,6 +102,8 @@
   border-color: var(--ru-primary);
   box-shadow: 0 0 0 1px rgba(244, 122, 33, 0.18);
 }
+
+/* opções de refeição */
 
 .ratings-meal-options {
   display: flex;
@@ -110,6 +123,7 @@
   color: var(--ru-text-main);
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+  font-family: var(--font-century);
 }
 
 .ratings-chip input {
@@ -131,9 +145,10 @@
   margin-top: 12px;
   font-size: 13px;
   color: var(--ru-text-muted);
+  font-family: var(--font-century);
 }
 
-/* Card da avaliação em si */
+/* ===== CARD DA AVALIAÇÃO ===== */
 
 .ratings-meal-card {
   margin-top: 12px;
@@ -144,15 +159,72 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Responsivo */
+/* ===== RESPONSIVO ===== */
 
+/* Tablets */
+@media (max-width: 900px) {
+  .ratings-main {
+    padding: 5rem 1.25rem 3.2rem;
+  }
+
+  .ratings-container {
+    max-width: 100%;
+  }
+
+  .ratings-title {
+    font-size: 1.6rem;
+  }
+
+  .ratings-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* Celulares */
 @media (max-width: 600px) {
   .ratings-main {
-    padding: 20px 10px 28px;
+    padding: 4.8rem 1rem 3rem;
+  }
+
+  .ratings-header {
+    text-align: left;
+  }
+
+  .ratings-title {
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+  }
+
+  .ratings-subtitle {
+    font-size: 0.8rem;
   }
 
   .ratings-filter-card,
   .ratings-meal-card {
     padding: 14px 14px 16px;
+  }
+
+  .ratings-filter-grid {
+    flex-direction: column;
+  }
+
+  .ratings-field {
+    flex: 1 1 100%;
+  }
+
+  .ratings-meal-options {
+    gap: 8px;
+  }
+
+  .ratings-chip {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1400px) {
+  .ratings-container {
+    max-width: 1040px;
   }
 }

@@ -18,7 +18,7 @@
 
 .res-filters { display: flex; gap: 8px; }
 .res-filters select {
-  height: 40px; border: 1px solid #e6e6e6; border-radius: 8px; padding: 0 10px; background: #fff; cursor: pointer;
+  height: 40px; border: 1px solid #e6e6e6; border-radius: 8px; padding: 0 10px; background: #fff; cursor: pointer; color: #8f8f8f; font-family: var(--var-century);
 }
 
 .res-total { justify-self: end; color: #8f8f8f; }
@@ -52,6 +52,12 @@
 }
 .chip.ok { border-color: #6a964e; background: #eef6ea; color: #2f6d1a; }
 .chip.cancel { border-color: #d6a6a6; background: #fdecec; color: #a12b2b; }
+
+.icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 3px;
+}
 
 @media (max-width: 840px) {
   .res-admin-toolbar { grid-template-columns: 1fr; gap: 10px; }

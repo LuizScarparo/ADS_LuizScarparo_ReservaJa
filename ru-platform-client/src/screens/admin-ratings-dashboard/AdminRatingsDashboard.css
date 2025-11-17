@@ -1,4 +1,5 @@
-/* Layout geral */
+/* ============= LAYOUT GERAL ============= */
+
 .ard-wrapper {
   display: flex;
   flex-direction: column;
@@ -10,21 +11,24 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 32px 16px 40px;
+  padding: 5.5rem 1.5rem 4rem; /* compensa header fixo e dá espaço pro footer */
   background: #fff8e9;
 }
 
+/* Card central */
 .ard-card {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1120px;
   background: #fffdf7;
   border-radius: 18px;
   border: 1px solid #f1dab0;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
   padding: 24px 32px 30px;
+  margin: 0 auto;
 }
 
-/* Cabeçalho */
+/* ============= CABEÇALHO ============= */
+
 .ard-header {
   text-align: center;
   margin-bottom: 18px;
@@ -36,6 +40,7 @@
   color: #f07a1a;
   font-weight: 700;
   margin-bottom: 4px;
+  text-transform: uppercase;
 }
 
 .ard-subtitle {
@@ -43,7 +48,8 @@
   color: #7b6a4e;
 }
 
-/* Filtros */
+/* ============= FILTROS ============= */
+
 .ard-filters {
   display: flex;
   flex-wrap: wrap;
@@ -52,6 +58,7 @@
   border-top: 1px solid #f3e0b5;
   border-bottom: 1px solid #f3e0b5;
   margin-bottom: 16px;
+  align-items: center;
 }
 
 .ard-field {
@@ -86,6 +93,7 @@
   display: flex;
   gap: 14px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .ard-radio {
@@ -101,6 +109,7 @@
 }
 
 .ard-field-button {
+  display: flex;
   align-items: flex-end;
 }
 
@@ -127,14 +136,15 @@
   transform: none;
 }
 
-/* Erro */
+/* Erro geral */
 .ard-error {
   margin-top: 8px;
   color: #c62828;
   font-size: 13px;
 }
 
-/* Resumo */
+/* ============= RESUMO DO DIA ============= */
+
 .ard-summary {
   margin-top: 14px;
 }
@@ -185,6 +195,7 @@
   color: #f28a1a;
 }
 
+/* distribuição de notas ocupa 1 coluna mas depois pode virar 2 ou 1 só no mobile */
 .ard-summary-dist {
   grid-column: span 1;
 }
@@ -225,9 +236,34 @@
   text-align: right;
 }
 
-/* Tabela */
+/* Reservas x consumo */
+
+.ard-reservations-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.ard-res-label {
+  color: #7b6a4e;
+}
+
+.ard-res-value {
+  font-weight: 600;
+  color: #444;
+}
+
+.ard-res-value-warn {
+  color: #c62828;
+}
+
+/* ============= TABELA DE AVALIAÇÕES INDIVIDUAIS ============= */
+
 .ard-table-wrapper {
   margin-top: 18px;
+  overflow-x: auto;
 }
 
 .ard-table-title {
@@ -239,6 +275,7 @@
 
 .ard-table {
   width: 100%;
+  min-width: 640px; /* garante scroll horizontal se precisar */
   border-collapse: collapse;
   font-size: 13px;
   background: #fff;
@@ -273,9 +310,11 @@
   color: #7b6a4e;
 }
 
-/* Últimos 7 dias (visão geral) */
+/* ============= BLOCO: ÚLTIMOS 7 DIAS ============= */
+
 .ard-last7 {
   margin-bottom: 18px;
+  overflow-x: auto;
 }
 
 .ard-last7-header {
@@ -283,6 +322,7 @@
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: 6px;
+  gap: 8px;
 }
 
 .ard-last7-title {
@@ -307,6 +347,7 @@
 
 .ard-last7-table {
   width: 100%;
+  min-width: 420px;
   border-collapse: collapse;
   font-size: 13px;
   background: #fff;
@@ -349,26 +390,7 @@
   color: #aaa;
 }
 
-.ard-reservations-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 13px;
-  margin-top: 4px;
-}
-
-.ard-res-label {
-  color: #7b6a4e;
-}
-
-.ard-res-value {
-  font-weight: 600;
-  color: #444;
-}
-
-.ard-res-value-warn {
-  color: #c62828;
-}
+/* ============= TABELA DE NÃO CONSUMIDORES ============= */
 
 .ard-no-consumed-wrapper {
   margin-top: 20px;
@@ -376,6 +398,7 @@
   border: 1px solid #f3e0b5;
   border-radius: 12px;
   padding: 14px 18px;
+  overflow-x: auto;
 }
 
 .ard-no-consumed-title {
@@ -387,6 +410,7 @@
 
 .ard-no-consumed-table {
   width: 100%;
+  min-width: 420px;
   border-collapse: collapse;
 }
 
@@ -402,21 +426,72 @@
   color: #7b5a2b;
 }
 
+/* ============= RESPONSIVO ============= */
 
+/* Tablets */
+@media (max-width: 1024px) {
+  .ard-main {
+    padding: 5.2rem 1.25rem 3.5rem;
+  }
 
-/* Responsivo */
-@media (max-width: 900px) {
+  .ard-card {
+    padding: 20px 20px 26px;
+  }
+
   .ard-summary-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 720px) {
-  .ard-card {
-    padding: 18px 14px 24px;
+/* Celulares médios */
+@media (max-width: 768px) {
+  .ard-main {
+    padding: 4.8rem 1rem 3rem;
+  }
+
+  .ard-header {
+    text-align: left;
+  }
+
+  .ard-title {
+    font-size: 20px;
+  }
+
+  .ard-subtitle {
+    font-size: 12px;
+  }
+
+  .ard-filters {
+    flex-direction: column;
+  }
+
+  .ard-field,
+  .ard-field-button {
+    width: 100%;
+  }
+
+  .ard-field-button {
+    align-items: flex-start;
+  }
+
+  .ard-load-button {
+    width: 100%;
+    text-align: center;
   }
 
   .ard-summary-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+  .ard-card {
+    padding: 18px 12px 22px;
+  }
+
+  .ard-last7-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

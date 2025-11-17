@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./ManageReservationsScreen.css";
+import magnifyingGlass from '../../assets/MagnifyingGlass.svg';
+import check from '../../assets/Check.svg';
 
-/* ----------------- Helpers ----------------- */
+
 const BR = new Intl.DateTimeFormat("pt-BR");
 const fmtDate = (iso) => {
   try {
@@ -16,16 +18,16 @@ const fmtDate = (iso) => {
 const contains = (hay, needle) =>
   String(hay || "").toLowerCase().includes(String(needle || "").toLowerCase());
 
-/** Segunda-feira da semana atual (local) */
+
 function getMonday(d = new Date()) {
-  const day = d.getDay(); // 0=Dom,1=Seg,...6=Sab
+  const day = d.getDay(); 
   const diff = (day === 0 ? -6 : 1 - day);
   const m = new Date(d);
   m.setHours(0, 0, 0, 0);
   m.setDate(d.getDate() + diff);
   return m;
 }
-/** Sexta-feira da semana atual (local) */
+
 function getFriday(d = new Date()) {
   const mon = getMonday(d);
   const f = new Date(mon);
@@ -33,6 +35,7 @@ function getFriday(d = new Date()) {
   f.setHours(23, 59, 59, 999);
   return f;
 }
+
 function isISOWithinWeek(iso, ref = new Date()) {
   const dt = new Date(iso + "T00:00:00");
   return dt >= getMonday(ref) && dt <= getFriday(ref);
@@ -44,7 +47,6 @@ function formatWeekLabel(ref = new Date()) {
   return `Semana ${s.split("/").slice(0, 2).join("/")} até ${e.split("/").slice(0, 2).join("/")}`;
 }
 
-/** Mapas UI <-> API */
 const roleToPt = (r) => {
   switch (String(r || "").toLowerCase()) {
     case "student": return "Aluno";
@@ -54,19 +56,19 @@ const roleToPt = (r) => {
     default: return r || "-";
   }
 };
+
 const apiMealToUi = (m) => (m === "lunch" ? "Almoço" : "Jantar");
 const uiMealToApi = (m) => (m === "Almoço" ? "lunch" : "dinner");
 
-/** Interpreta status para os chips (presente/ausente) */
 function isPresent(status) {
   if (!status) return null;
   const s = String(status).toUpperCase();
   if (["CONSUMED", "PRESENT", "CHECKED", "DONE", "OK", "TRUE"].includes(s)) return true;
   if (["NO_SHOW", "ABSENT", "CANCELED", "CANCELLED", "NOK", "FALSE"].includes(s)) return false;
-  return null; // "pending" ou outro
+  return null;
 }
 
-/** Achata { reservations: [...] } -> linhas por data/refeição */
+
 function flattenReservations(payload) {
   const list = Array.isArray(payload?.reservations) ? payload.reservations : [];
   const rows = [];
@@ -109,7 +111,6 @@ function flattenReservations(payload) {
     }
   }
 
-  // ordena por data e refeição
   rows.sort((a, b) => {
     const t = new Date(a.date).getTime() - new Date(b.date).getTime();
     if (t !== 0) return t;
@@ -119,7 +120,6 @@ function flattenReservations(payload) {
   return rows;
 }
 
-/* ----------------- Componente ----------------- */
 export default function ManageReservationsScreen() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -136,9 +136,9 @@ export default function ManageReservationsScreen() {
       setLoading(true);
       setErr(null);
       try {
-        const res = await api.get("/reservations");        // <-- usa teu axios com token
-        const flat = flattenReservations(res.data);        // <-- achata
-        const thisWeek = flat.filter((r) => isISOWithinWeek(r.date)); // <-- semana atual
+        const res = await api.get("/reservations");
+        const flat = flattenReservations(res.data);
+        const thisWeek = flat.filter((r) => isISOWithinWeek(r.date));
         setRows(thisWeek);
       } catch (e) {
         console.error(e);
@@ -163,7 +163,6 @@ export default function ManageReservationsScreen() {
 
   const total = filtered.length;
 
-  /** PATCH /reservations/status/{id} com { day, meal, status } */
   async function setStatus(rowKey, newState) {
     const idx = rows.findIndex((r) => r.key === rowKey);
     if (idx === -1) return;
@@ -172,7 +171,6 @@ export default function ManageReservationsScreen() {
     const desiredStatus = newState === "present" ? "consumed" : "no_show";
     const payload = { day: row.date, meal: row.mealApi, status: desiredStatus };
 
-    // UI otimista
     const prev = [...rows];
     const next = [...rows];
     next[idx] = { ...row, status: desiredStatus };
@@ -201,7 +199,9 @@ export default function ManageReservationsScreen() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
-          <button className="icon-button" aria-label="Buscar">🔎</button>
+          <button className="icon-button" aria-label="Buscar">
+            <img src={magnifyingGlass} alt="Lupa" className="icon" />
+          </button>
         </div>
 
         <div className="res-filters">
@@ -262,7 +262,9 @@ export default function ManageReservationsScreen() {
                         className={`chip ${present === true ? "ok" : ""}`}
                         title="Presente"
                         onClick={() => setStatus(r.key, "present")}
-                      >✓</button>
+                      >
+                        <img src={check} alt="Check" className="icon" />
+                      </button>
                       <button
                         className={`chip ${present === false ? "cancel" : ""}`}
                         title="Ausente"
