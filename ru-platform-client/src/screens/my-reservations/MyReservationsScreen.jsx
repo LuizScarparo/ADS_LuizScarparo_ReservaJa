@@ -9,8 +9,14 @@ import bin from '../../assets/bin.svg';
 
 const BR = new Intl.DateTimeFormat("pt-BR");
 const fmtDate = (iso) => {
-    try { return BR.format(new Date(iso)); } catch { return iso; }
-};
+    try {
+      const [y, m, d] = String(iso).split("-");
+      if (!y || !m || !d) return iso;
+      return `${d}/${m}/${y}`;
+    } catch {
+      return iso;
+    }
+  };
 function getMonday(d = new Date()) {
     const day = d.getDay(); // 0=Dom,1=Seg,...6=Sab
     const diff = (day === 0 ? -6 : 1 - day);
