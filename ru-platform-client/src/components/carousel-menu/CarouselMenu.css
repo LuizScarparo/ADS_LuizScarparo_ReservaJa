@@ -89,6 +89,7 @@
 }
 
 @media (max-width: 768px) {
+
   /* em celular, o usuário navega por swipe, então pode esconder as setas */
   .custom-arrow {
     display: none;
@@ -96,5 +97,9 @@
 
   .image-slider-container {
     padding-bottom: 2rem;
+  }
+
+  .slick-dots li {
+    width: 7px;
   }
 }

@@ -36,6 +36,12 @@ export default function HomeScreen() {
                 Editar Cardápio
               </button>
             )}
+            <button type='button' className='scheduler-btn-top' onClick={() => setOpen(true)}>Agendar</button>
+            <ScheduleDialog
+              open={open}
+              onClose={() => setOpen(false)}
+              onSuccess={reloadAfterSuccess}
+            />
           </div>
 
           <div className="home-carousel">
