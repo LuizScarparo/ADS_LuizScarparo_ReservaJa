@@ -16,11 +16,11 @@ export default function BackgroundModel({ children }) {
 
         handleResize();
         window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    
     return (
         <div className="background-model-container">
             <div className={`ru-divider-container ${isMobile ? 'mobile' : ''}`}>
