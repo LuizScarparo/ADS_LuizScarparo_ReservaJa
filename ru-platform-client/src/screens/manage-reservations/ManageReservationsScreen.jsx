@@ -6,6 +6,8 @@ import check from '../../assets/Check.svg';
 
 
 const BR = new Intl.DateTimeFormat("pt-BR");
+
+
 const fmtDate = (iso) => {
   try {
     const [y, m, d] = String(iso).split("-");
@@ -15,6 +17,7 @@ const fmtDate = (iso) => {
     return iso;
   }
 };
+
 const contains = (hay, needle) =>
   String(hay || "").toLowerCase().includes(String(needle || "").toLowerCase());
 
@@ -42,9 +45,16 @@ function isISOWithinWeek(iso, ref = new Date()) {
 }
 
 function formatWeekLabel(ref = new Date()) {
-  const s = fmtDate(getMonday(ref).toISOString());
-  const e = fmtDate(getFriday(ref).toISOString());
-  return `Semana ${s.split("/").slice(0, 2).join("/")} até ${e.split("/").slice(0, 2).join("/")}`;
+  const mondayISO = getMonday(ref).toISOString().split("T")[0];
+  const fridayISO = getFriday(ref).toISOString().split("T")[0];
+
+  const s = fmtDate(mondayISO);
+  const e = fmtDate(fridayISO);
+
+  const sLabel = s.split("/").slice(0, 2).join("/");
+  const eLabel = e.split("/").slice(0, 2).join("/");
+
+  return `Semana ${sLabel} até ${eLabel}`;
 }
 
 const roleToPt = (r) => {

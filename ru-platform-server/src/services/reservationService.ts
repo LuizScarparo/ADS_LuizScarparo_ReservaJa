@@ -13,7 +13,7 @@ class ReservationService {
       const requestedDates = Object.keys(reservedDates);
 
       if (userRole === "visitor" && (requestedDates.length > 1 || requestedDates[0] !== today.toISODate())) {
-        throw new Error("Visitors are only allowed to reserve for today's date.");
+        throw new Error("Visitantes podem agendar apenas para o dia de hoje.");
       }
 
       const weekDay = today.weekday; // luxon: 1 (Mon) ... 7 (Sun)
@@ -44,11 +44,11 @@ class ReservationService {
           const currentHour = today.hour;
 
           if (meals.lunch?.isReserved && currentHour >= 10) {
-            throw new Error("Lunch for today can only be reserved until 10:00 AM.");
+            throw new Error("Que pena, o almoço de hoje só pode ser agendado até as 10:00.");
           }
 
           if (meals.dinner?.isReserved && currentHour >= 22) {
-            throw new Error("Dinner for today can only be reserved until 4:00 PM.");
+            throw new Error("Que pena, a janta de hoje só pode ser agendada até as 4:00.");
           }
         }
       }
