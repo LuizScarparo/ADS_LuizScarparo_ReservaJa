@@ -1,12 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./ManageReservationsScreen.css";
-import magnifyingGlass from '../../assets/MagnifyingGlass.svg';
-import check from '../../assets/Check.svg';
-
+import magnifyingGlass from "../../assets/MagnifyingGlass.svg";
+import check from "../../assets/Check.svg";
 
 const BR = new Intl.DateTimeFormat("pt-BR");
-
 
 const fmtDate = (iso) => {
   try {
@@ -21,10 +19,9 @@ const fmtDate = (iso) => {
 const contains = (hay, needle) =>
   String(hay || "").toLowerCase().includes(String(needle || "").toLowerCase());
 
-
 function getMonday(d = new Date()) {
-  const day = d.getDay(); 
-  const diff = (day === 0 ? -6 : 1 - day);
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
   const m = new Date(d);
   m.setHours(0, 0, 0, 0);
   m.setDate(d.getDate() + diff);
@@ -59,11 +56,16 @@ function formatWeekLabel(ref = new Date()) {
 
 const roleToPt = (r) => {
   switch (String(r || "").toLowerCase()) {
-    case "student": return "Aluno";
-    case "teacher": return "Professor";
-    case "employee": return "Servidor";
-    case "admin": return "Admin";
-    default: return r || "-";
+    case "student":
+      return "Aluno";
+    case "teacher":
+      return "Professor";
+    case "employee":
+      return "Servidor";
+    case "admin":
+      return "Admin";
+    default:
+      return r || "-";
   }
 };
 
@@ -73,21 +75,27 @@ const uiMealToApi = (m) => (m === "Almoço" ? "lunch" : "dinner");
 function isPresent(status) {
   if (!status) return null;
   const s = String(status).toUpperCase();
-  if (["CONSUMED", "PRESENT", "CHECKED", "DONE", "OK", "TRUE"].includes(s)) return true;
-  if (["NO_SHOW", "ABSENT", "CANCELED", "CANCELLED", "NOK", "FALSE"].includes(s)) return false;
+  if (["CONSUMED", "PRESENT", "CHECKED", "DONE", "OK", "TRUE"].includes(s))
+    return true;
+  if (
+    ["NO_SHOW", "ABSENT", "CANCELED", "CANCELLED", "NOK", "FALSE"].includes(s)
+  )
+    return false;
   return null;
 }
 
-
 function flattenReservations(payload) {
-  const list = Array.isArray(payload?.reservations) ? payload.reservations : [];
+  const list = Array.isArray(payload?.reservations)
+    ? payload.reservations
+    : [];
   const rows = [];
 
   for (const item of list) {
     const id = item.reservationId || item.id;
     const u = item.user || {};
     const name = u.name || "";
-    const reg = u.enrollmentNumber || item.enrollmentNumber || item.registration;
+    const reg =
+      u.enrollmentNumber || item.enrollmentNumber || item.registration;
     const type = roleToPt(u.role || item.type);
 
     const reserved = item.reservedDates || {};
@@ -102,7 +110,7 @@ function flattenReservations(payload) {
           status: meals.lunch.status, // pending | consumed | no_show
           name,
           registration: reg,
-          type
+          type,
         });
       }
       if (meals?.dinner?.isReserved) {
@@ -115,7 +123,7 @@ function flattenReservations(payload) {
           status: meals.dinner.status,
           name,
           registration: reg,
-          type
+          type,
         });
       }
     }
@@ -138,6 +146,7 @@ export default function ManageReservationsScreen() {
   const [q, setQ] = useState("");
   const [onlyMeal, setOnlyMeal] = useState("");
   const [onlyType, setOnlyType] = useState("");
+  const [onlyDate, setOnlyDate] = useState(""); // novo filtro de dia
 
   const weekLabel = formatWeekLabel();
 
@@ -152,24 +161,49 @@ export default function ManageReservationsScreen() {
         setRows(thisWeek);
       } catch (e) {
         console.error(e);
-        setErr(e?.response?.data?.error || e?.message || "Erro ao carregar reservas.");
+        setErr(
+          e?.response?.data?.error ||
+            e?.message ||
+            "Erro ao carregar reservas."
+        );
       } finally {
         setLoading(false);
       }
     })();
   }, []);
 
+  // datas disponíveis para o select
+  const availableDates = useMemo(() => {
+    const set = new Set();
+    rows.forEach((r) => {
+      if (!r.date) return;
+      const d = String(r.date).split("T")[0];
+      if (d) set.add(d);
+    });
+    return Array.from(set).sort(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime()
+    );
+  }, [rows]);
+
   const filtered = useMemo(() => {
     const needle = q.trim();
     return rows
       .filter((r) => (onlyMeal ? r.mealUi === onlyMeal : true))
-      .filter((r) => (onlyType ? String(r.type || "").toLowerCase() === String(onlyType).toLowerCase() : true))
+      .filter((r) =>
+        onlyType
+          ? String(r.type || "").toLowerCase() ===
+            String(onlyType).toLowerCase()
+          : true
+      )
+      .filter((r) =>
+        onlyDate ? String(r.date).startsWith(onlyDate) : true
+      )
       .filter((r) => {
         if (!needle) return true;
         const base = `${r.name || ""} ${r.registration || ""}`;
         return contains(base, needle);
       });
-  }, [rows, q, onlyMeal, onlyType]);
+  }, [rows, q, onlyMeal, onlyType, onlyDate]);
 
   const total = filtered.length;
 
@@ -215,22 +249,43 @@ export default function ManageReservationsScreen() {
         </div>
 
         <div className="res-filters">
-          <select value={onlyMeal} onChange={(e) => setOnlyMeal(e.target.value)}>
+          <select
+            value={onlyMeal}
+            onChange={(e) => setOnlyMeal(e.target.value)}
+          >
             <option value="">Todas as refeições</option>
             <option value="Almoço">Almoço</option>
             <option value="Jantar">Jantar</option>
           </select>
-          <select value={onlyType} onChange={(e) => setOnlyType(e.target.value)}>
+
+          <select
+            value={onlyType}
+            onChange={(e) => setOnlyType(e.target.value)}
+          >
             <option value="">Todos os tipos</option>
             <option value="Aluno">Aluno</option>
             <option value="Professor">Professor</option>
             <option value="Servidor">Servidor</option>
             <option value="Admin">Admin</option>
           </select>
+
+          {/* filtro por dia */}
+          <select
+            value={onlyDate}
+            onChange={(e) => setOnlyDate(e.target.value)}
+          >
+            <option value="">Todos os dias</option>
+            {availableDates.map((d) => (
+              <option key={d} value={d}>
+                {fmtDate(d)}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="res-total">
-          TOTAL DE RESERVAS: <span className="res-total-number">{total}</span>
+          TOTAL DE RESERVAS:{" "}
+          <span className="res-total-number">{total}</span>
         </div>
       </section>
 
@@ -248,43 +303,63 @@ export default function ManageReservationsScreen() {
           </thead>
           <tbody>
             {loading && (
-              <tr><td colSpan={6} className="center muted">Carregando…</td></tr>
+              <tr>
+                <td colSpan={6} className="center muted">
+                  Carregando…
+                </td>
+              </tr>
             )}
             {err && !loading && (
-              <tr><td colSpan={6} className="center error">{err}</td></tr>
+              <tr>
+                <td colSpan={6} className="center error">
+                  {err}
+                </td>
+              </tr>
             )}
             {!loading && !err && filtered.length === 0 && (
-              <tr><td colSpan={6} className="center muted">Nenhuma reserva encontrada.</td></tr>
+              <tr>
+                <td colSpan={6} className="center muted">
+                  Nenhuma reserva encontrada.
+                </td>
+              </tr>
             )}
 
-            {!loading && !err && filtered.map((r) => {
-              const present = isPresent(r.status);
-              return (
-                <tr key={r.key}>
-                  <td>{fmtDate(r.date)}</td>
-                  <td>{r.registration || "-"}</td>
-                  <td className="res-name">{String(r.name || "").toUpperCase()}</td>
-                  <td>{r.type || "-"}</td>
-                  <td>{r.mealUi}</td>
-                  <td>
-                    <div className="res-status-actions">
-                      <button
-                        className={`chip ${present === true ? "ok" : ""}`}
-                        title="Presente"
-                        onClick={() => setStatus(r.key, "present")}
-                      >
-                        <img src={check} alt="Check" className="icon" />
-                      </button>
-                      <button
-                        className={`chip ${present === false ? "cancel" : ""}`}
-                        title="Ausente"
-                        onClick={() => setStatus(r.key, "absent")}
-                      >✕</button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+            {!loading &&
+              !err &&
+              filtered.map((r) => {
+                const present = isPresent(r.status);
+                return (
+                  <tr key={r.key}>
+                    <td>{fmtDate(r.date)}</td>
+                    <td>{r.registration || "-"}</td>
+                    <td className="res-name">
+                      {String(r.name || "").toUpperCase()}
+                    </td>
+                    <td>{r.type || "-"}</td>
+                    <td>{r.mealUi}</td>
+                    <td>
+                      <div className="res-status-actions">
+                        <button
+                          className={`chip ${present === true ? "ok" : ""}`}
+                          title="Presente"
+                          onClick={() => setStatus(r.key, "present")}
+                        >
+                          <img src={check} alt="Check" className="icon" />
+                        </button>
+                        <button
+                          className={`chip ${
+                            present === false ? "cancel" : ""
+                          }`}
+                          title="Ausente"
+                          onClick={() => setStatus(r.key, "absent")}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </section>
