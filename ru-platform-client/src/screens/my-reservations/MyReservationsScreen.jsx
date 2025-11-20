@@ -10,13 +10,13 @@ import bin from '../../assets/bin.svg';
 const BR = new Intl.DateTimeFormat("pt-BR");
 const fmtDate = (iso) => {
     try {
-      const [y, m, d] = String(iso).split("-");
-      if (!y || !m || !d) return iso;
-      return `${d}/${m}/${y}`;
+        const [y, m, d] = String(iso).split("-");
+        if (!y || !m || !d) return iso;
+        return `${d}/${m}/${y}`;
     } catch {
-      return iso;
+        return iso;
     }
-  };
+};
 function getMonday(d = new Date()) {
     const day = d.getDay(); // 0=Dom,1=Seg,...6=Sab
     const diff = (day === 0 ? -6 : 1 - day);
@@ -37,9 +37,16 @@ function isISOWithinWeek(iso, ref = new Date()) {
     return dt >= getMonday(ref) && dt <= getFriday(ref);
 }
 function weekLabel(ref = new Date()) {
-    const s = fmtDate(getMonday(ref).toISOString());
-    const e = fmtDate(getFriday(ref).toISOString());
-    return `Semana ${s.split("/").slice(0, 2).join("/")} até ${e.split("/").slice(0, 2).join("/")}`;
+    const mondayISO = getMonday(ref).toISOString().split("T")[0];
+    const fridayISO = getFriday(ref).toISOString().split("T")[0];
+
+    const s = fmtDate(mondayISO);
+    const e = fmtDate(fridayISO);
+
+    const sLabel = s.split("/").slice(0, 2).join("/");
+    const eLabel = e.split("/").slice(0, 2).join("/");
+
+    return `Semana ${sLabel} até ${eLabel}`;
 }
 
 function statusPt(s) {
@@ -169,7 +176,7 @@ export default function MyReservationsScreen() {
                                     <td>
                                         <div className="myres-actions">
                                             <button className="icon-btn" title="Excluir" onClick={() => handleDelete(r)}>
-                                                 <img src={bin} alt="Excluir" className="trash-icon" />
+                                                <img src={bin} alt="Excluir" className="trash-icon" />
                                             </button>
                                         </div>
                                     </td>

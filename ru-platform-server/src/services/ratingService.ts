@@ -4,15 +4,24 @@ export type MealType = "lunch" | "dinner";
 
 interface CreateOrUpdateRatingInput {
   userId: string;
-  date: string; // YYYY-MM-DD
+  date: string;
   mealType: MealType;
-  rating: number; // 1-5
+  rating: number;
   comment?: string | null;
 }
 
 class RatingService {
   static async createOrUpdate(input: CreateOrUpdateRatingInput) {
     const { userId, date, mealType, rating, comment } = input;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const mealDate = new Date(date);
+
+    if (mealDate > today) {
+      throw new Error("Não é possível avaliar uma refeição que ainda não aconteceu.");
+    }
 
     if (rating < 1 || rating > 5) {
       throw new Error("Rating deve estar entre 1 e 5");
@@ -56,7 +65,6 @@ class RatingService {
       throw new Error("ID do usuário não encontrado na verificação de reserva");
     }
 
-    // ATENÇÃO AQUI: campo correto é "user.id"
     const snap = await db
       .collection("reservations")
       .where("user.id", "==", userId)
@@ -142,12 +150,9 @@ class RatingService {
     };
   }
 
-  // src/services/ratingService.ts
 
   static async listRatingsByMeal(params: { date: string; mealType: MealType }) {
     const { date, mealType } = params;
-
-    // Remove o orderBy para não exigir índice composto
     const snap = await db
       .collection("mealRatings")
       .where("date", "==", date)
@@ -161,11 +166,10 @@ class RatingService {
         userId: data.userId,
         rating: data.rating,
         comment: data.comment ?? "",
-        createdAt: data.createdAt, // Timestamp do Firestore
+        createdAt: data.createdAt,
       };
     });
 
-    // Ordena em memória por createdAt (mais recente primeiro)
     items.sort((a, b) => {
       const ta = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
       const tb = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;

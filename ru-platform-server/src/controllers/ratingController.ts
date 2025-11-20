@@ -67,6 +67,11 @@ class RatingController {
         return;
       }
 
+      if (msg.includes("Não é possível avaliar uma refeição que ainda não aconteceu")) {
+        res.status(401).json({ message: msg });
+        return;
+      }
+
       res.status(500).json({ message: "Erro ao registrar avaliação" });
     }
   }
