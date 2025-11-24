@@ -146,9 +146,14 @@ export default function ManageReservationsScreen() {
   const [q, setQ] = useState("");
   const [onlyMeal, setOnlyMeal] = useState("");
   const [onlyType, setOnlyType] = useState("");
-  const [onlyDate, setOnlyDate] = useState(""); // novo filtro de dia
+  const [onlyDate, setOnlyDate] = useState("");
+  const [weekRef, setWeekRef] = useState(() => new Date());
 
-  const weekLabel = formatWeekLabel();
+  const weekLabel = formatWeekLabel(weekRef);
+
+  const today = new Date();
+  const isCurrentWeekOrFuture =
+    getMonday(weekRef) >= getMonday(today);
 
   useEffect(() => {
     (async () => {
@@ -157,14 +162,13 @@ export default function ManageReservationsScreen() {
       try {
         const res = await api.get("/reservations");
         const flat = flattenReservations(res.data);
-        const thisWeek = flat.filter((r) => isISOWithinWeek(r.date));
-        setRows(thisWeek);
+        setRows(flat);
       } catch (e) {
         console.error(e);
         setErr(
           e?.response?.data?.error ||
-            e?.message ||
-            "Erro ao carregar reservas."
+          e?.message ||
+          "Erro ao carregar reservas."
         );
       } finally {
         setLoading(false);
@@ -188,11 +192,12 @@ export default function ManageReservationsScreen() {
   const filtered = useMemo(() => {
     const needle = q.trim();
     return rows
+      .filter((r) => isISOWithinWeek(r.date, weekRef))
       .filter((r) => (onlyMeal ? r.mealUi === onlyMeal : true))
       .filter((r) =>
         onlyType
           ? String(r.type || "").toLowerCase() ===
-            String(onlyType).toLowerCase()
+          String(onlyType).toLowerCase()
           : true
       )
       .filter((r) =>
@@ -203,7 +208,8 @@ export default function ManageReservationsScreen() {
         const base = `${r.name || ""} ${r.registration || ""}`;
         return contains(base, needle);
       });
-  }, [rows, q, onlyMeal, onlyType, onlyDate]);
+  }, [rows, q, onlyMeal, onlyType, onlyDate, weekRef]);
+
 
   const total = filtered.length;
 
@@ -233,6 +239,34 @@ export default function ManageReservationsScreen() {
       <header className="res-admin-header">
         <h1>RESERVAS DA SEMANA</h1>
         <p className="res-week-sub">{weekLabel}</p>
+        <div className="res-week-nav">
+          <button
+            type="button"
+            onClick={() =>
+              setWeekRef((prev) => {
+                const d = new Date(prev);
+                d.setDate(d.getDate() - 7);
+                return d;
+              })
+            }
+          >
+            ◀ Semana anterior
+          </button>
+
+          <button
+            type="button"
+            disabled={isCurrentWeekOrFuture}
+            onClick={() =>
+              setWeekRef((prev) => {
+                const d = new Date(prev);
+                d.setDate(d.getDate() + 7);
+                return d;
+              })
+            }
+          >
+            Próxima semana ▶
+          </button>
+        </div>
       </header>
 
       <section className="res-admin-toolbar">
@@ -347,9 +381,8 @@ export default function ManageReservationsScreen() {
                           <img src={check} alt="Check" className="icon" />
                         </button>
                         <button
-                          className={`chip ${
-                            present === false ? "cancel" : ""
-                          }`}
+                          className={`chip ${present === false ? "cancel" : ""
+                            }`}
                           title="Ausente"
                           onClick={() => setStatus(r.key, "absent")}
                         >
