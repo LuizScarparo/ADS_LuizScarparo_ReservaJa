@@ -19,7 +19,7 @@
 
 /* Card central destacado (via .slick-center) */
 .slick-center .card-menu .card-image {
-  transform: translateY(-10px) scale(1);
+  transform: translateY(-10px) scale(1.1);
   opacity: 1;
   z-index: 2;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
