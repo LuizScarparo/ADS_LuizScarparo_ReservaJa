@@ -4,7 +4,7 @@
   background: rgba(0, 0, 0, 0.65);
   display: grid;
   place-items: center;
-  z-index: 1000;
+  z-index: 9999;;
 }
 
 .emd-modal {
@@ -13,6 +13,9 @@
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   padding: 20px 20px 16px;
+
+  max-height: 90vh; 
+  overflow-y: auto;
 }
 
 .emd-header {
